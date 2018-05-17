@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Struts2 DTD -->
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <constant name="struts.i18n.encoding" value="utf-8" />
+    <constant name="struts.devMode" value="true" />
+    
+    <!-- only for test -->
+    <package name="testAction" extends="struts-default,json-default" namespace="/testAction">
+        <action name="*" class="action.TestAction" method="{1}">
+            <result name="success" type="json">
+                <param name="root">params</param>
+            </result>
+            <allowed-methods>
+                regex:.*
+            </allowed-methods>
+        </action>
+    </package>
+</struts>
