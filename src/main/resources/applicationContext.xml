@@ -88,6 +88,11 @@
         -->
     </bean>
     <bean id="userDao" class="dao.impl.UserDaoImpl" parent="baseDao"/>
+    <bean id="fridgeDao" class="dao.impl.FridgeDaoImpl" parent="baseDao"/>
+    <bean id="itemDao" class="dao.impl.ItemDaoImpl" parent="baseDao"/>
+    <bean id="dailyNutritionDao" class="dao.impl.DailyNutritionDaoImpl" parent="baseDao"/>
+    <bean id="userFridgeRelationshipDao" class="dao.impl.UserFridgeRelationshipDaoImpl" parent="baseDao"/>
+    <bean id="fridgeItemRelationshipDao" class="dao.impl.FridgeItemRelationshipDaoImpl" parent="baseDao"/>
 
     <!-- ============================================================= -->
 
