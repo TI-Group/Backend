@@ -12,3 +12,17 @@ password如果采用md5加密，数据库字段长度至少需要32
 pom.xml添加的包可能有一些不是必须的
 
 ==================================================================
+
+2018/5/20 -- by hz
+
+添加剩余的数据表
+添加了dao层的接口和实现类，但没有实现里面的函数
+修改了applicationContext.xml
+
+service层和dao层未完全实现，以后根据接口需要随时添加
+
+简单的设想：（仅仅是设想，具体如何实现参照app的接口需求）
+UserService管理用户（注册、登录、个人信息等，对应User表和UserFridgeRelationship表），
+FridgeService管理冰箱和物品（对应Fridge表、Item表、FridgeItemRelationship表）
+DailyNutritionService管理用户的每日营养记录（对应DailyNutrition表）（是否有必要独立一个service？还是与UserService合并？）
+
