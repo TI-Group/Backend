@@ -7,6 +7,18 @@
     <constant name="struts.i18n.encoding" value="utf-8" />
     <constant name="struts.devMode" value="true" />
     
+    <!-- 后台管理接口 -->
+    <package name="manage" extends="struts-default,json-default" namespace="/manageUser">
+        <action name="*" class="action.UserAction" method="{1}">
+            <result name="success" type="json">
+                <param name="root">params</param>
+            </result>
+            <allowed-methods>
+                allUsers,addUser,updateUser,deleteUser
+            </allowed-methods>
+        </action>
+    </package>
+    
     <!-- only for test -->
     <package name="testAction" extends="struts-default,json-default" namespace="/testAction">
         <action name="*" class="action.TestAction" method="{1}">
