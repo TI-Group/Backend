@@ -1,9 +1,10 @@
-package action; 
+package action.manage; 
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import action.BaseAction;
 import common.constant.UserRole;
 import common.util.PasswordUtil;
 import model.User;

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>管理页</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/datatables/1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/datatables/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.bootcss.com/datatables/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" style="color: cadetblue" href="#">Fridge</a>
+</nav>
+<div class="container-fluid bg-light">
+    <div class="row">
+        <div class="col-4">
+            <ul class="nav flex-column pt-2">
+                <li class="nav-item">
+                    <a class="nav-link" href="user.html"><i
+                            class="fa fa-table fa-fw"></i>用户<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#"><i
+                            class="fa fa-table fa-fw"></i>冰箱<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="item.html"><i
+                            class="fa fa-table fa-fw"></i>物品<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="dailynutrition.html"><i
+                            class="fa fa-table fa-fw"></i>每日营养摄入<span class="sr-only"></span></a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-8 bg-white">
+            <div class="row">
+                <div class="col-1 offset-11">
+                    <button class="btn btn-primary" id="add"><i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <table class="table" id="dataTable">
+                        <thead>
+                        <tr>
+                            <td>#</td>
+                            <td>操作</td>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 模态框 -->
+<div class="modal fade" id="formModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <!-- 模态框头部 -->
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalTitle">添加冰箱</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- 模态框主体 -->
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="fridgeId" class="col-form-label">冰箱id</label>
+                        <input type="text" class="form-control" id="fridgeId" readonly>
+                    </div>
+                </form>
+            </div>
+            <!-- 模态框底部 -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="save">保存</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function onDel(id) {
+        $.get("../manageFridge/deleteFridge?fridgeId=" + id, function(result){
+            if (result.result === true) location.reload();
+            else console.log(result);
+        });
+    }
+
+    function onUpdate(id) {
+        $('#modalTitle').html("编辑冰箱");
+
+        $("#fridgeId").val(id);
+
+        $("#save").attr("data-id", id);
+        $('#formModal').modal('show');
+    }
+
+    $(document).ready(function () {
+        $('#dataTable').DataTable({
+            bFilter: false,
+            ajax: {
+                url: '../manageFridge/allFridges',
+                dataSrc: 'rows'
+            },
+            columns: [
+                {data: 'fridgeId'},
+                {data: null, orderable: false}
+            ],
+            fnRowCallback: function (nRow, aData, iDataIndex) {
+                let id = $('td', nRow).eq(0).text();
+                $('td:eq(-1)', nRow).html(
+                    '<a href="javascript:onUpdate(' + id + ')"><i class="fa fa-edit"></i></a>' + 
+                    '<a href="javascript:onDel(' + id + ')"><i class="fa fa-trash"></i></a>');
+                return nRow;
+            },
+        });
+        $('#add').click(function(){
+            $('#modalTitle').html("添加冰箱");
+
+            $("#fridgeId").val("");
+            
+            $("#save").attr("data-id", "");
+            $('#formModal').modal('show');
+        });
+        $('#save').click(function(e){
+            let dataSet = e.currentTarget.dataset;
+            let id = dataSet.id;
+            if (id === "") {
+                $.get('../manageFridge/addFridge?fridgeId=' + id, function(result){
+                    if (result.result === true) location.reload();
+                    else console.log(result);
+                });
+            }
+            else {
+                $.get('../manageFridge/updateFridge?fridgeId=' + id, function(result){
+                    if (result.result === true) location.reload();
+                    else console.log(result);
+                });
+            }
+        })
+    });
+</script>
+</body>
+</html>

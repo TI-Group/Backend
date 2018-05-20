@@ -37,6 +37,9 @@
 		<property name="mappingResources">
 			<list>
 				<value>model/User.hbm.xml</value>
+                <value>model/Item.hbm.xml</value>
+                <value>model/Fridge.hbm.xml</value>
+                <value>model/DailyNutrition.hbm.xml</value>
 			</list>
 		</property>
 		<!-- Hibernate SessionFactory -->
@@ -100,11 +103,20 @@
     <bean id="userService" class="service.impl.UserServiceImpl">
         <property name="userDao" ref="userDao" />
     </bean>
+    <bean id="itemService" class="service.impl.ItemServiceImpl">
+        <property name="itemDao" ref="itemDao" />
+    </bean>
+    <bean id="fridgeService" class="service.impl.FridgeServiceImpl">
+        <property name="fridgeDao" ref="fridgeDao" />
+    </bean>
+    <bean id="dailyNutritionService" class="service.impl.DailyNutritionServiceImpl">
+        <property name="dailyNutritionDao" ref="dailyNutritionDao" />
+    </bean>
     
     <!-- ============================================================= -->
     
     <!-- Action -->
-    <bean id="userAction" class="action.UserAction">
+    <bean id="userAction" class="action.manage.UserAction">
         <property name="userService" ref="userService" />
     </bean>
     
