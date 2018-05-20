@@ -21,7 +21,6 @@ public class TestAction extends BaseAction {
     private String username;
     private String password;
     private String tel;
-    private Integer calories;
     private Integer role;
     
     /* =================================================== */
@@ -66,12 +65,6 @@ public class TestAction extends BaseAction {
     public void setTel(String tel) {
         this.tel = tel;
     }
-    public Integer getCalories() {
-        return calories;
-    }
-    public void setCalories(Integer calories) {
-        this.calories = calories;
-    }
     public Integer getRole() {
         return role;
     }
@@ -93,14 +86,14 @@ public class TestAction extends BaseAction {
     }
     public String addUser() {
         this.params = new HashMap();
-        User user = new User(this.userId, this.username, PasswordUtil.getEncryptedPassword(this.password), this.tel, this.calories, UserRole.values()[this.role]);
+        User user = new User(this.userId, this.username, PasswordUtil.getEncryptedPassword(this.password), this.tel, UserRole.values()[this.role]);
         boolean result = this.userService.addUser(user);
         this.params.put("result", result);
         return SUCCESS;
     }
     public String updateUser() {
         this.params = new HashMap();
-        User user = new User(this.userId, this.username, PasswordUtil.getEncryptedPassword(this.password), this.tel, this.calories, UserRole.values()[this.role]);
+        User user = new User(this.userId, this.username, PasswordUtil.getEncryptedPassword(this.password), this.tel, UserRole.values()[this.role]);
         boolean result = this.userService.updateUser(user);
         this.params.put("result", new Boolean(result));
         return SUCCESS;

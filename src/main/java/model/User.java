@@ -7,7 +7,6 @@ public class User {
     private String username;
     private String password;
     private String tel;
-    private int calories;
     private UserRole role;
 
     /* ======================================= */
@@ -15,13 +14,12 @@ public class User {
     public User() {
         super();
     }
-    public User(int userId, String username, String password, String tel, int calories, UserRole role) {
+    public User(int userId, String username, String password, String tel, UserRole role) {
         super();
         this.userId = userId;
         this.username = username;
         this.password = password;
         this.tel = tel;
-        this.calories = calories;
         this.role = role;
     }
     
@@ -48,12 +46,6 @@ public class User {
     }
     public void setTel(String tel) {
         this.tel = tel;
-    }
-    public int getCalories() {
-        return calories;
-    }
-    public void setCalories(int calories) {
-        this.calories = calories;
     }
     public UserRole getRole() {
         return role;

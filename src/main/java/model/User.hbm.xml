@@ -3,15 +3,14 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="model.User" table="user">
-	    <id name="userId" column="userId">
+	<class name="model.User" table="User">
+	    <id name="userId">
             <generator class="native"/>
         </id>
-        <property name="username" column="username" />
-        <property name="password" column="password" />
-        <property name="tel" column="tel" />
-        <property name="calories" column="calories" />
-        <property name="role" column="role">
+        <property name="username" />
+        <property name="password" />
+        <property name="tel" />
+        <property name="role">
             <type name="org.hibernate.type.EnumType">
                 <param name="enumClass">common.constant.UserRole</param>
             </type>
