@@ -4,8 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import common.constant.UserRole;
 import common.util.PasswordUtil;
+import dao.TokenDao;
 import model.User;
 import service.*;
 
@@ -15,13 +18,11 @@ public class TestAction extends BaseAction {
     
     private Map params;
     
-    private UserService userService;
-
+    @Autowired
+    private TokenDao tokenDao;
+    
     private Integer userId;
-    private String username;
-    private String password;
-    private String tel;
-    private Integer role;
+    private String token;
     
     /* =================================================== */
     
@@ -34,11 +35,11 @@ public class TestAction extends BaseAction {
         this.params = params;
     }
     
-    public UserService getUserService() {
-        return userService;
+    public TokenDao getTokenDao() {
+        return tokenDao;
     }
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+    public void setTokenDao(TokenDao tokenDao) {
+        this.tokenDao = tokenDao;
     }
 
     public Integer getUserId() {
@@ -47,61 +48,37 @@ public class TestAction extends BaseAction {
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
-    public String getUsername() {
-        return username;
+    
+    public String getToken() {
+        return token;
     }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    public String getTel() {
-        return tel;
-    }
-    public void setTel(String tel) {
-        this.tel = tel;
-    }
-    public Integer getRole() {
-        return role;
-    }
-    public void setRole(Integer role) {
-        this.role = role;
+    public void setToken(String token) {
+        this.token = token;
     }
     
     /* =================================================== */
     
     // actions
     
-    public String getAllUsers() {
+    public String createToken() {
         this.params = new HashMap();
-        List<User> allUsers = this.userService.getAllUsers();
+        token = tokenDao.createToken(userId);
         this.params.put("result", true);
-        this.params.put("total", allUsers.size());
-        this.params.put("rows", allUsers);
+        this.params.put("token", token);
         return SUCCESS;
     }
-    public String addUser() {
+    
+    public String checkToken() {
         this.params = new HashMap();
-        User user = new User(this.userId, this.username, PasswordUtil.getEncryptedPassword(this.password), this.tel, UserRole.values()[this.role]);
-        boolean result = this.userService.addUser(user);
+        boolean result = tokenDao.checkToken(userId, token);
         this.params.put("result", result);
         return SUCCESS;
     }
-    public String updateUser() {
+    
+    public String deleteToken() {
         this.params = new HashMap();
-        User user = new User(this.userId, this.username, PasswordUtil.getEncryptedPassword(this.password), this.tel, UserRole.values()[this.role]);
-        boolean result = this.userService.updateUser(user);
-        this.params.put("result", new Boolean(result));
-        return SUCCESS;
-    }
-    public String deleteUser() {
-        this.params = new HashMap();
-        boolean result = this.userService.deleteUser(this.userId);
-        this.params.put("result", result);
+        tokenDao.deleteToken(userId);
+        this.params.put("result", true);
         return SUCCESS;
     }
 

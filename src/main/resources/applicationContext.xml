@@ -23,6 +23,18 @@
 		p:initialPoolSize="1" p:maxIdleTime="20" />
 	-->
 
+    <!-- Redis Config -->
+	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxIdle" value="300" />
+		<property name="maxWaitMillis" value="1000" />
+		<property name="testOnBorrow" value="true" />
+	</bean>
+	<bean id="jedisConnectionFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+		p:host-name="localhost" p:port="6379" p:pool-config-ref="poolConfig" />
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate"
+		p:connection-factory-ref="jedisConnectionFactory" />
+
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
           destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
@@ -96,6 +108,9 @@
     <bean id="dailyNutritionDao" class="dao.impl.DailyNutritionDaoImpl" parent="baseDao"/>
     <bean id="userFridgeRelationshipDao" class="dao.impl.UserFridgeRelationshipDaoImpl" parent="baseDao"/>
     <bean id="fridgeItemRelationshipDao" class="dao.impl.FridgeItemRelationshipDaoImpl" parent="baseDao"/>
+    <bean id="tokenDao" class="dao.impl.TokenDaoImpl">
+        <property name="redisTemplate" ref="redisTemplate" />
+    </bean>
 
     <!-- ============================================================= -->
 
@@ -121,8 +136,8 @@
     </bean>
     
     <!-- only for test -->
-    <bean id="testAction" class="action.TestAction">
+<!--     <bean id="testAction" class="action.TestAction">
         <property name="userService" ref="userService"/>
-    </bean>
+    </bean> -->
     
 </beans>
