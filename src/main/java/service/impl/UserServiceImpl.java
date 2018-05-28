@@ -3,6 +3,7 @@ package service.impl;
 import java.util.List;
 
 import dao.UserDao;
+import dao.TokenDao;
 import model.User;
 import service.UserService;
 
@@ -46,6 +47,28 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
     public boolean deleteUser(int userId) {
         User user = this.userDao.getUserById(userId);
         return this.userDao.delete(user);
+    }
+
+    @Override
+    public String userLogin(String tel, String password){
+        User user = this.userDao.getUserByTel(tel);
+        if (user.getRole() == "user" && user.getPassword() == password && user != null){
+            return this.tokenDao.createToken(user.getId());
+        }
+        return null;
+    }
+    @Override
+    public boolean adminLogin(String username, String password){
+        User user = this.userDao.getUserByUsername(username);
+        if (user.getRole() == "admin" && user.getPassword() == password && user != null){
+            return true;
+        }
+        return false;
+    }
+    @Override
+    public boolean userSignup(User user){
+        user.setUserId(0);
+        return this.userDao.save(user);
     }
     
 }

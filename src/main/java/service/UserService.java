@@ -22,4 +22,8 @@ public interface UserService extends BaseService {
     public boolean addUser(User user);
     public boolean updateUser(User newUserProfile);
     public boolean deleteUser(int userId);
+
+    public boolean adminLogin(String username, String password);
+    public String userLogin(String tel, String password);
+    public boolean userSignup(String phone, String username, String password);
 }
