@@ -39,9 +39,9 @@ public class TokenFilter implements Filter{
 			return;
 		}
 		int userId=Integer.parseInt(req.getParameter("user_id"));
-		String sign=req.getParameter("sign");
+		String token=req.getParameter("token");
 		try {
-			if(!tokenDao.checkSign(userId, uri, sign)){
+			if(!tokenDao.checkToken(userId, token)){
 				((HttpServletResponse) response).sendError(HttpServletResponse.SC_FORBIDDEN, "status wrong");
 	            return;
 			}
