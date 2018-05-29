@@ -23,7 +23,7 @@ drop table if exists User;
 /*==============================================================*/
 create table DailyChange
 (
-   changeId             int not null,
+   changeId             int not null auto_increment,
    fridgeId             int not null,
    itemId               int not null,
    userId               int not null,
@@ -37,7 +37,7 @@ create table DailyChange
 /*==============================================================*/
 create table DailyNutrition
 (
-   id                   int not null,
+   id                   int not null auto_increment,
    userId               int not null,
    date                 date not null,
    protein              float,
@@ -54,7 +54,7 @@ create table DailyNutrition
 /*==============================================================*/
 create table Fridge
 (
-   fridgeId             int not null,
+   fridgeId             int not null auto_increment,
    primary key (fridgeId)
 );
 
@@ -65,7 +65,7 @@ create table FridgeItemRelationship
 (
    itemId               int not null,
    fridgeId             int not null,
-   id                   int not null,
+   id                   int not null auto_increment,
    remainTime           int,
    primary key (id)
 );
@@ -75,7 +75,7 @@ create table FridgeItemRelationship
 /*==============================================================*/
 create table Item
 (
-   itemId               int not null,
+   itemId               int not null auto_increment,
    name                 varchar(20) not null,
    shelflife            int not null,
    calories             int not null,
@@ -87,7 +87,7 @@ create table Item
 /*==============================================================*/
 create table User
 (
-   userId               int not null,
+   userId               int not null auto_increment,
    username             varchar(20) not null,
    password             varchar(32) not null,
    tel                  varchar(14) not null,
@@ -102,7 +102,7 @@ create table UserFridgeRelationship
 (
    fridgeId             int not null,
    userId               int not null,
-   id                   int not null,
+   id                   int not null auto_increment,
    primary key (id)
 );
 
