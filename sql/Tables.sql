@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018/5/28 21:43:15                           */
+/* Created on:     2018/5/29 18:39:29                           */
 /*==============================================================*/
 
 
@@ -24,9 +24,11 @@ drop table if exists User;
 create table DailyChange
 (
    changeId             int not null,
-   fridge               int,
-   item                 int,
+   fridgeId             int not null,
+   itemId               int not null,
+   userId               int not null,
    amount               int not null,
+   time                 timestamp not null,
    primary key (changeId)
 );
 
@@ -36,7 +38,7 @@ create table DailyChange
 create table DailyNutrition
 (
    id                   int not null,
-   user                 int,
+   userId               int not null,
    date                 date not null,
    protein              float,
    calories             int,
@@ -61,8 +63,8 @@ create table Fridge
 /*==============================================================*/
 create table FridgeItemRelationship
 (
-   item                 int not null,
-   fridge               int not null,
+   itemId               int not null,
+   fridgeId             int not null,
    id                   int not null,
    remainTime           int,
    primary key (id)
@@ -98,30 +100,33 @@ create table User
 /*==============================================================*/
 create table UserFridgeRelationship
 (
-   fridge               int not null,
-   user                 int not null,
+   fridgeId             int not null,
+   userId               int not null,
    id                   int not null,
    primary key (id)
 );
 
-alter table DailyChange add constraint FK_FridgeDailyChange foreign key (fridge)
+alter table DailyChange add constraint FK_FridgeDailyChange foreign key (fridgeId)
       references Fridge (fridgeId) on delete restrict on update restrict;
 
-alter table DailyChange add constraint FK_ItemChange foreign key (item)
+alter table DailyChange add constraint FK_ItemChange foreign key (itemId)
       references Item (itemId) on delete restrict on update restrict;
 
-alter table DailyNutrition add constraint FK_UserDailyNutrition foreign key (user)
+alter table DailyChange add constraint FK_User foreign key (userId)
       references User (userId) on delete restrict on update restrict;
 
-alter table FridgeItemRelationship add constraint FK_FridgeItemRelationship foreign key (item)
+alter table DailyNutrition add constraint FK_UserDailyNutrition foreign key (userId)
+      references User (userId) on delete restrict on update restrict;
+
+alter table FridgeItemRelationship add constraint FK_FridgeItemRelationship foreign key (itemId)
       references Item (itemId) on delete restrict on update restrict;
 
-alter table FridgeItemRelationship add constraint FK_FridgeItemRelationship2 foreign key (fridge)
+alter table FridgeItemRelationship add constraint FK_FridgeItemRelationship2 foreign key (fridgeId)
       references Fridge (fridgeId) on delete restrict on update restrict;
 
-alter table UserFridgeRelationship add constraint FK_UserFridgeRelationship foreign key (fridge)
+alter table UserFridgeRelationship add constraint FK_UserFridgeRelationship foreign key (fridgeId)
       references Fridge (fridgeId) on delete restrict on update restrict;
 
-alter table UserFridgeRelationship add constraint FK_UserFridgeRelationship2 foreign key (user)
+alter table UserFridgeRelationship add constraint FK_UserFridgeRelationship2 foreign key (userId)
       references User (userId) on delete restrict on update restrict;
 
