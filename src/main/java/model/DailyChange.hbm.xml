@@ -3,12 +3,14 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="model.FridgeItemRelationship" table="FridgeItemRelationship">
-	    <id name="id">
+	<class name="model.DailyChange" table="DailyChange">
+	    <id name="changeId">
             <generator class="native"/>
         </id>
-        <property name="itemId" />
+        <property name="userId" />
         <property name="fridgeId" />
-        <property name="remainTime" />
+        <property name="itemId" />
+        <property name="amount" />
+        <property name="time" type="timestamp"/>
 	</class>
 </hibernate-mapping>

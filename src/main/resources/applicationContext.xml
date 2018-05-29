@@ -52,6 +52,7 @@
                 <value>model/Item.hbm.xml</value>
                 <value>model/Fridge.hbm.xml</value>
                 <value>model/DailyNutrition.hbm.xml</value>
+                <value>model/DailyChange.hbm.xml</value>
 			</list>
 		</property>
 		<!-- Hibernate SessionFactory -->
@@ -75,6 +76,8 @@
 			<tx:method name="*" />
 		</tx:attributes>
 	</tx:advice>
+	<tx:annotation-driven/>
+	
 	<aop:config>
 		<!-- appService Bean -->
 		<aop:pointcut id="beanPointcut" expression="execution(* service..*.*(..))" />
@@ -106,6 +109,7 @@
     <bean id="fridgeDao" class="dao.impl.FridgeDaoImpl" parent="baseDao"/>
     <bean id="itemDao" class="dao.impl.ItemDaoImpl" parent="baseDao"/>
     <bean id="dailyNutritionDao" class="dao.impl.DailyNutritionDaoImpl" parent="baseDao"/>
+    <bean id="dailyChangeDao" class="dao.impl.DailyChangeDaoImpl" parent="baseDao"/>
     <bean id="userFridgeRelationshipDao" class="dao.impl.UserFridgeRelationshipDaoImpl" parent="baseDao"/>
     <bean id="fridgeItemRelationshipDao" class="dao.impl.FridgeItemRelationshipDaoImpl" parent="baseDao"/>
     <bean id="tokenDao" class="dao.impl.TokenDaoImpl">

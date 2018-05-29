@@ -3,10 +3,13 @@ package dao.impl;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.mongodb.DB;
 
 import dao.BaseDao;
 
+@Transactional
 public class BaseDaoImpl implements BaseDao {
     protected SessionFactory sessionFactory;
     protected MongoTemplate mongoTemplate;
