@@ -128,6 +128,9 @@
     </bean>
     <bean id="fridgeService" class="service.impl.FridgeServiceImpl">
         <property name="fridgeDao" ref="fridgeDao" />
+        <property name="itemDao" ref="itemDao" />
+        <property name="fridgeItemRelationshipDao" ref="fridgeItemRelationshipDao" />
+        <property name="dailyChangeDao" ref="dailyChangeDao" />
     </bean>
     <bean id="dailyNutritionService" class="service.impl.DailyNutritionServiceImpl">
         <property name="dailyNutritionDao" ref="dailyNutritionDao" />

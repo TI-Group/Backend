@@ -3,6 +3,7 @@ package model;
 public class FridgeItemRelationship {
     private int id;
     private int itemId;
+    private int amount;
     private int fridgeId;
     private int remainTime;
 
@@ -11,10 +12,10 @@ public class FridgeItemRelationship {
     public FridgeItemRelationship() {
         super();
     }
-    public FridgeItemRelationship(int id, int itemId, int fridgeId, int remainTime) {
+    public FridgeItemRelationship(int itemId, int amount, int fridgeId, int remainTime) {
         super();
-        this.id = id;
         this.itemId = itemId;
+        this.amount = amount;
         this.fridgeId = fridgeId;
         this.remainTime = remainTime;
     }
@@ -49,5 +50,11 @@ public class FridgeItemRelationship {
 	public void setRemainTime(int remainTime) {
 		this.remainTime = remainTime;
 	}
+    public int getAmount() {
+        return amount;
+    }
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
 
 }

@@ -19,6 +19,15 @@ public class ItemDaoImpl extends BaseDaoImpl implements ItemDao {
     }
 
     @Override
+    public Item getItemByName(String name) {
+        String hql = "from Item i where i.name = :name";
+        Query query = getSession().createQuery(hql).setParameter("name", name);
+        List<Item> items = query.list();
+        Item item = items.size() == 1 ? items.get(0) : null;
+        return item;
+    }
+    
+    @Override
     public Item getItemById(int id) {
         String hql = "from Item i where i.itemId = :itemId";
         Query query = getSession().createQuery(hql).setParameter("itemId", id);
@@ -26,5 +35,5 @@ public class ItemDaoImpl extends BaseDaoImpl implements ItemDao {
         Item item = items.size() == 1 ? items.get(0) : null;
         return item;
     }
-    
+
 }

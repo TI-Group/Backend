@@ -8,6 +8,7 @@
             <generator class="native"/>
         </id>
         <property name="itemId" />
+        <property name="amount" />
         <property name="fridgeId" />
         <property name="remainTime" />
 	</class>

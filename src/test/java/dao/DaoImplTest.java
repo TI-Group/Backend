@@ -82,7 +82,7 @@ public class DaoImplTest extends SpringTestBase {
 		itemDao.save(i);
 		Fridge f = new Fridge(1);
 		fridgeDao.save(f);
-		DailyChange dc = new DailyChange(f.getFridgeId(), i.getItemId(), u.getUserId(), 10);
+		DailyChange dc = new DailyChange(f.getFridgeId(), i.getItemId(), u.getUserId(), 10, null);
 		dailyChangeDao.save(dc);
 		DailyChange testGet = dailyChangeDao.getDailyChangeById(dc.getChangeId());
 		assertTrue(testGet != null);

@@ -64,6 +64,7 @@ create table Fridge
 create table FridgeItemRelationship
 (
    itemId               int not null,
+   amount               int not null,
    fridgeId             int not null,
    id                   int not null auto_increment,
    remainTime           int,

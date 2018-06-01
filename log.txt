@@ -26,3 +26,11 @@ UserService管理用户（注册、登录、个人信息等，对应User表和Us
 FridgeService管理冰箱和物品（对应Fridge表、Item表、FridgeItemRelationship表）
 DailyNutritionService管理用户的每日营养记录（对应DailyNutrition表）（是否有必要独立一个service？还是与UserService合并？）
 
+==================================================================
+
+2018/6/1 -- by hz
+
+修复了部分语法错误
+数据库fridgeItemRelationship表添加了amount字段
+完成fridgeServiceImpl.openFridge方法，当冰箱门打开时更新相关的数据表
+预留了冰箱内部图片识别的接口（common.util.ImageUtil.imageToItem函数），

@@ -14,11 +14,12 @@ public class DailyChange {
         super();
     }
     
-    public DailyChange(int fridgeId, int itemId, int userId, int amount) {
+    public DailyChange(int fridgeId, int itemId, int userId, int amount, Timestamp time) {
     	this.fridgeId = fridgeId;
     	this.itemId = itemId;
     	this.userId = userId;
     	this.amount = amount;
+    	this.time = time;
     }
     
 	public int getChangeId() {
