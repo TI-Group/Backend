@@ -1,7 +1,6 @@
 package filter;
 
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +45,7 @@ public class TokenFilter implements Filter{
 	            return;
 			}
 			chain.doFilter(request,response);
-		} catch (NoSuchAlgorithmException e) {
+		} catch (Exception e) {
 			chain.doFilter(request, response);
 		}
 	}
