@@ -121,6 +121,7 @@
     <!-- Service -->
     <bean id="userService" class="service.impl.UserServiceImpl">
         <property name="userDao" ref="userDao" />
+        <property name="tokenDao" ref="tokenDao" />
     </bean>
     <bean id="itemService" class="service.impl.ItemServiceImpl">
         <property name="itemDao" ref="itemDao" />
