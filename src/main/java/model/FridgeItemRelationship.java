@@ -16,6 +16,7 @@ public class FridgeItemRelationship {
         this.id = id;
         this.itemId = itemId;
         this.fridgeId = fridgeId;
+        this.remainTime = remainTime;
     }
     
     public int getId() {
