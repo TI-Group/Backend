@@ -1,8 +1,13 @@
 package action.user;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
+import action.BaseAction;
+import common.constant.UserRole;
+import common.util.PasswordUtil;
+import model.User;
+import service.UserService;
 
 public class UserAction extends BaseAction {
     private static final long serialVersionUID = 1L;

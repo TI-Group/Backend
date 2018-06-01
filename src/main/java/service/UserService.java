@@ -25,5 +25,5 @@ public interface UserService extends BaseService {
 
     public boolean adminLogin(String username, String password);
     public String userLogin(String tel, String password);
-    public boolean userSignup(String phone, String username, String password);
+    //public boolean userSignup(String phone, String username, String password);
 }

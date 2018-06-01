@@ -2,13 +2,15 @@ package service.impl;
 
 import java.util.List;
 
+import common.constant.UserRole;
 import dao.UserDao;
 import dao.TokenDao;
 import model.User;
 import service.UserService;
 
 public class UserServiceImpl extends BaseServiceImpl implements UserService {
-    private UserDao userDao; 
+    private UserDao userDao;
+    private TokenDao tokenDao; 
     
     /* ======================================================== */
 
@@ -18,12 +20,12 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
-
-    /* ======================================================== */
-
-    // TODO
-    /*
-     */
+    public TokenDao getTokenDao() {
+        return tokenDao;
+    }
+    public void setTokenDao(TokenDao tokenDao) {
+        this.tokenDao = tokenDao;
+    }
     
     /* ======================================================== */
     
@@ -52,23 +54,18 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
     @Override
     public String userLogin(String tel, String password){
         User user = this.userDao.getUserByTel(tel);
-        if (user.getRole() == "user" && user.getPassword() == password && user != null){
-            return this.tokenDao.createToken(user.getId());
+        if (user.getRole() == UserRole.COMMON && user.getPassword() == password && user != null){
+            return this.tokenDao.createToken(user.getUserId());
         }
         return null;
     }
     @Override
     public boolean adminLogin(String username, String password){
         User user = this.userDao.getUserByUsername(username);
-        if (user.getRole() == "admin" && user.getPassword() == password && user != null){
+        if (user.getRole() == UserRole.ADMIN && user.getPassword() == password && user != null){
             return true;
         }
         return false;
-    }
-    @Override
-    public boolean userSignup(User user){
-        user.setUserId(0);
-        return this.userDao.save(user);
     }
     
 }
