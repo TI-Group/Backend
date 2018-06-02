@@ -1,37 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>AdminLoginPage</title>
-		<meta charset="utf-8">
-		<link href="../css/style.css" rel='stylesheet' type='text/css' />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-		<!--webfonts-->
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,300,600,700' rel='stylesheet' type='text/css'>
-		<!--//webfonts-->
+<title>AdminLoginPage</title>
+<meta charset="utf-8">
+<link href="../css/style.css" rel='stylesheet' type='text/css' />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--webfonts-->
+<link
+	href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,300,600,700'
+	rel='stylesheet' type='text/css'>
+<!--//webfonts-->
 </head>
 <body>
-	 <!-----start-main---->
-	 <div class="main">
+	<!-----start-main---->
+	<div class="main">
 		<div class="login-form">
 			<h1>Member Login</h1>
-					<div class="head">
-						<img src="../images/user.png" alt=""/>
-					</div>
-				<form role="form" action="UserAction!adminLogin" method="post" name="loginForm" onsubmit="return on_submit()">
-						<input type="text" class="text" value="USERNAME" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'USERNAME';}" id = "username" >
-						<input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" id = "password">
-						<div class="submit">
-							<input type="submit" value="LOGIN" id = "login">
-						</div>
-					<p><a href="#">Forgot Password ?</a></p>
-				</form>
+			<div class="head">
+				<img src="../images/user.png" alt="" />
 			</div>
-			<!--//End-login-form-->
+			<form role="form" action="../userAction/adminLogin" method="post"
+				name="loginForm" onsubmit="return on_submit()" id="loginForm">
+				<input type="text" class="text" value="USERNAME"
+					onfocus="this.value = '';"
+					onblur="if (this.value == '') {this.value = 'USERNAME';}"
+					id="username" name="username"> <input type="password"
+					value="Password" onfocus="this.value = '';"
+					onblur="if (this.value == '') {this.value = 'Password';}"
+					id="password" name="password">
+				<div class="submit">
+					<input type="submit" value="LOGIN" id="login">
+				</div>
+			</form>
 		</div>
-			 <!-----//end-main---->
-		 		
+		<!--//End-login-form-->
+	</div>
+	<!-----//end-main---->
+
 </body>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery.form/4.2.2/jquery.form.min.js"></script>
 <script>
 	function on_submit(){
 		if(username.value == '' || username.value == 'USERNAME'){
@@ -40,6 +49,9 @@
 		}
 		return true;
 	}
+    $("#loginForm").ajaxForm(function(data){  
+        if (data.result === true) location.href="user.html";
+    });  
 </script>
 
 </html>

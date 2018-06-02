@@ -54,7 +54,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
     @Override
     public String userLogin(String tel, String password){
         User user = this.userDao.getUserByTel(tel);
-        if (user.getRole() == UserRole.COMMON && user.getPassword() == password && user != null){
+        if (user.getRole() == UserRole.COMMON && password.equals(user.getPassword()) && user != null){
             return this.tokenDao.createToken(user.getUserId());
         }
         return null;
@@ -62,7 +62,9 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
     @Override
     public boolean adminLogin(String username, String password){
         User user = this.userDao.getUserByUsername(username);
-        if (user.getRole() == UserRole.ADMIN && user.getPassword() == password && user != null){
+        if (user.getRole() == UserRole.ADMIN 
+                && password.equals(user.getPassword()) 
+                && user != null){
             return true;
         }
         return false;
