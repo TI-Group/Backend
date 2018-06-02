@@ -1,0 +1,36 @@
+2018/5/18 -- by hz
+
+创建项目
+
+暂时只完成了对user表的增删改查操作和简单测试，其他数据表待添加
+sql/prepare.sql创建数据库并添加用户
+action层暂未实现，与app交互的数据格式待确定（testAction仅仅为了开发时的测试）
+
+User表的tel属性似乎改为String更自然一些？？
+TI.sql脚本的主键缺少auto_increment属性
+password如果采用md5加密，数据库字段长度至少需要32
+pom.xml添加的包可能有一些不是必须的
+
+==================================================================
+
+2018/5/20 -- by hz
+
+添加剩余的数据表
+添加了dao层的接口和实现类，但没有实现里面的函数
+修改了applicationContext.xml
+
+service层和dao层未完全实现，以后根据接口需要随时添加
+
+简单的设想：（仅仅是设想，具体如何实现参照app的接口需求）
+UserService管理用户（注册、登录、个人信息等，对应User表和UserFridgeRelationship表），
+FridgeService管理冰箱和物品（对应Fridge表、Item表、FridgeItemRelationship表）
+DailyNutritionService管理用户的每日营养记录（对应DailyNutrition表）（是否有必要独立一个service？还是与UserService合并？）
+
+==================================================================
+
+2018/6/1 -- by hz
+
+修复了部分语法错误
+数据库fridgeItemRelationship表添加了amount字段
+完成fridgeServiceImpl.openFridge方法，当冰箱门打开时更新相关的数据表
+预留了冰箱内部图片识别的接口（common.util.ImageUtil.imageToItem函数），

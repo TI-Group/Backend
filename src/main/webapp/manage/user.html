@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>管理页</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/datatables/1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/datatables/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.bootcss.com/datatables/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" style="color: cadetblue" href="#">Fridge</a>
+</nav>
+<div class="container-fluid bg-light">
+    <div class="row">
+        <div class="col-4">
+            <ul class="nav flex-column pt-2">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#"><i
+                            class="fa fa-table fa-fw"></i>用户<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="fridge.html"><i
+                            class="fa fa-table fa-fw"></i>冰箱<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="item.html"><i
+                            class="fa fa-table fa-fw"></i>物品<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="dailynutrition.html"><i
+                            class="fa fa-table fa-fw"></i>每日营养摄入<span class="sr-only"></span></a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-8 bg-white">
+            <div class="row">
+                <div class="col-1 offset-11">
+                    <button class="btn btn-primary" id="add"><i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <table class="table" id="dataTable">
+                        <thead>
+                        <tr>
+                            <td>#</td>
+                            <td>用户名</td>
+                            <td>密码(md5加密)</td>
+                            <td>手机</td>
+                            <td>身份</td>
+                            <td>操作</td>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 模态框 -->
+<div class="modal fade" id="formModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <!-- 模态框头部 -->
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalTitle">添加用户</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- 模态框主体 -->
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="userId" class="col-form-label">用户id</label>
+                        <input type="text" class="form-control" id="userId" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="username" class="col-form-label">用户名</label>
+                        <input type="text" class="form-control" id="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-form-label">密码</label>
+                        <input type="password" class="form-control" id="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="tel" class="col-form-label">手机</label>
+                        <input type="tel" class="form-control" id="tel">
+                    </div>
+                    <div class="form-group">
+                        <label for="role" class="col-form-label">身份</label>
+                        <select class="form-control" id="role">
+                            <option value=1>普通用户</option>
+                            <option value=0>管理员</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <!-- 模态框底部 -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="save">保存</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function onDel(id) {
+        $.get("../manageUser/deleteUser?userId=" + id, function(result){
+            if (result.result === true) location.reload();
+            else console.log(result);
+        });
+    }
+
+    function onUpdate(id, name, pw, tel, role) {
+        $('#modalTitle').html("编辑用户");
+
+        $("#userId").val(id);
+        $("#username").val(name);
+        $("#password").val("");
+        $("#tel").val(tel);
+        if (role === 'COMMON')
+            $("#role").val(1);
+        else
+            $("#role").val(0);
+
+        $("#save").attr("data-id", id);
+        $('#formModal').modal('show');
+    }
+
+    $(document).ready(function () {
+        $('#dataTable').DataTable({
+            bFilter: false,
+            ajax: {
+                url: '../manageUser/allUsers',
+                dataSrc: 'rows'
+            },
+            columns: [
+                {data: 'userId'},
+                {data: 'username'},
+                {data: 'password'},
+                {data: 'tel'},
+                {data: 'role'},
+                {data: null, orderable: false}
+            ],
+            fnRowCallback: function (nRow, aData, iDataIndex) {
+                let id = $('td', nRow).eq(0).text();
+                let name = $('td', nRow).eq(1).text();
+                let pw = $('td', nRow).eq(2).text();
+                let tel = $('td', nRow).eq(3).text();
+                let role = $('td', nRow).eq(4).text();
+                $('td:eq(-1)', nRow).html(
+                    '<a href="javascript:onUpdate(' + id + ',\'' + name + '\',\'' + pw + '\',\'' + tel + '\',\'' + role + '\')"><i class="fa fa-edit"></i></a>' +
+                    '<a href="javascript:onDel(' + id + ')"><i class="fa fa-trash"></i></a>');
+                return nRow;
+            },
+        });
+        $('#add').click(function(){
+            $('#modalTitle').html("添加用户");
+
+            $("#userId").val("");
+            $("#username").val("");
+            $("#password").val("");
+            $("#tel").val("");
+            $("#role").val(1);
+
+            $("#save").attr("data-id", "");
+            $('#formModal').modal('show');
+        });
+        $('#save').click(function(e){
+            let username = $("#username").val();
+            let password = $("#password").val();
+            let tel = $("#tel").val();
+            let role = $("#role").val();
+            let dataSet = e.currentTarget.dataset;
+            let id = dataSet.id;
+            if (id === "") {
+                $.get('../manageUser/addUser?userId=' + id + '&username=' + username + '&password=' + password + '&tel=' + tel + '&role=' + role, function(result){
+                    if (result.result === true) location.reload();
+                    else console.log(result);
+                });
+            }
+            else {
+                $.get('../manageUser/updateUser?userId=' + id + '&username=' + username + '&password=' + password + '&tel=' + tel + '&role=' + role, function(result){
+                    if (result.result === true) location.reload();
+                    else console.log(result);
+                });
+            }
+        })
+    });
+</script>
+</body>
+</html>

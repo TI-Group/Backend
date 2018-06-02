@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="model.DailyChange" table="DailyChange">
+	    <id name="changeId">
+            <generator class="native"/>
+        </id>
+        <property name="userId" />
+        <property name="fridgeId" />
+        <property name="itemId" />
+        <property name="amount" />
+        <property name="time" type="timestamp"/>
+	</class>
+</hibernate-mapping>

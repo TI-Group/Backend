@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>管理页</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/datatables/1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/datatables/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.bootcss.com/datatables/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" style="color: cadetblue" href="#">Fridge</a>
+</nav>
+<div class="container-fluid bg-light">
+    <div class="row">
+        <div class="col-4">
+            <ul class="nav flex-column pt-2">
+                <li class="nav-item">
+                    <a class="nav-link" href="user.html"><i
+                            class="fa fa-table fa-fw"></i>用户<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="fridge.html"><i
+                            class="fa fa-table fa-fw"></i>冰箱<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#"><i
+                            class="fa fa-table fa-fw"></i>物品<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="dailynutrition.html"><i
+                            class="fa fa-table fa-fw"></i>每日营养摄入<span class="sr-only"></span></a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-8 bg-white">
+            <div class="row">
+                <div class="col-1 offset-11">
+                    <button class="btn btn-primary" id="add"><i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <table class="table" id="dataTable">
+                        <thead>
+                        <tr>
+                            <td>#</td>
+                            <td>物品名称</td>
+                            <td>预期保存时间</td>
+                            <td>物品卡路里</td>
+                            <td>操作</td>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 模态框 -->
+<div class="modal fade" id="formModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <!-- 模态框头部 -->
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalTitle">添加物品</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- 模态框主体 -->
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="itemId" class="col-form-label">物品id</label>
+                        <input type="text" class="form-control" id="itemId" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">物品名称</label>
+                        <input type="text" class="form-control" id="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="shelflife" class="col-form-label">预期保存时间</label>
+                        <input type="text" class="form-control" id="shelflife">
+                    </div>
+                    <div class="form-group">
+                        <label for="calories" class="col-form-label">卡路里</label>
+                        <input type="text" class="form-control" id="calories">
+                    </div>
+                </form>
+            </div>
+            <!-- 模态框底部 -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="save">保存</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function onDel(id) {
+        $.get("../manageItem/deleteItem?itemId=" + id, function(result){
+            if (result.result === true) location.reload();
+            else console.log(result);
+        });
+    }
+
+    function onUpdate(id, name, shelflife, cal) {
+        $('#modalTitle').html("编辑物品");
+
+        $("#itemId").val(id);
+        $("#name").val(name);
+        $("#shelflife").val(shelflife);
+        $("#calories").val(cal);
+
+        $("#save").attr("data-id", id);
+        $('#formModal').modal('show');
+    }
+
+    $(document).ready(function () {
+        $('#dataTable').DataTable({
+            bFilter: false,
+            ajax: {
+                url: '../manageItem/allItems',
+                dataSrc: 'rows'
+            },
+            columns: [
+                {data: 'itemId'},
+                {data: 'name'},
+                {data: 'shelflife'},
+                {data: 'calories'},
+                {data: null, orderable: false}
+            ],
+            fnRowCallback: function (nRow, aData, iDataIndex) {
+                let id = $('td', nRow).eq(0).text();
+                let name = $('td', nRow).eq(1).text();
+                let shelflife = $('td', nRow).eq(2).text();
+                let cal = $('td', nRow).eq(3).text();
+                $('td:eq(-1)', nRow).html(
+                    '<a href="javascript:onUpdate(' + id + ',\'' + name + '\',' + shelflife + ',' + cal + ')"><i class="fa fa-edit"></i></a>' +
+                    '<a href="javascript:onDel(' + id + ')"><i class="fa fa-trash"></i></a>');
+                return nRow;
+            },
+        });
+        $('#add').click(function(){
+            $('#modalTitle').html("添加物品");
+
+            $("#itemId").val("");
+            $("#name").val("");
+            $("#shelflife").val("");
+            $("#calories").val("");
+
+            $("#save").attr("data-id", "");
+            $('#formModal').modal('show');
+        });
+        $('#save').click(function(e){
+            let name = $("#name").val();
+            let shelflife = $("#shelflife").val();
+            let calories = $("#calories").val();
+            let dataSet = e.currentTarget.dataset;
+            let id = dataSet.id;
+            if (id === "") {
+                $.get('../manageItem/addItem?' + 'name=' + name + '&shelflife=' + shelflife + '&calories=' + calories, function(result){
+                    if (result.result === true) location.reload();
+                    else console.log(result);
+                });
+            }
+            else {
+                $.get('../manageItem/updateItem?itemId=' + id + '&name=' + name + '&shelflife=' + shelflife + '&calories=' + calories, function(result){
+                    if (result.result === true) location.reload();
+                    else console.log(result);
+                });
+            }
+        })
+    });
+</script>
+</body>
+</html>

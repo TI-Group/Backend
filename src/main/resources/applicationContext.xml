@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+        http://www.springframework.org/schema/data/mongo
+        http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd">
+        
+	<!-- Bean
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close" p:driverClass="com.mysql.jdbc.Driver"
+		p:jdbcUrl="jdbc:mysql://localhost:3306/fridge" p:user="fridge"
+		p:password="fridge" p:maxPoolSize="40" p:minPoolSize="1"
+		p:initialPoolSize="1" p:maxIdleTime="20" />
+	-->
+
+    <!-- Redis Config -->
+	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxIdle" value="300" />
+		<property name="maxWaitMillis" value="1000" />
+		<property name="testOnBorrow" value="true" />
+	</bean>
+	<bean id="jedisConnectionFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+		p:host-name="localhost" p:port="6379" p:pool-config-ref="poolConfig" />
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate"
+		p:connection-factory-ref="jedisConnectionFactory" />
+
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/fridge?useUnicode=true&amp;characterEncoding=UTF-8" />
+        <property name="username" value="fridge" />
+        <property name="password" value="fridge" />
+    </bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
+		p:dataSource-ref="dataSource">
+		<property name="mappingResources">
+			<list>
+				<value>model/User.hbm.xml</value>
+                <value>model/Item.hbm.xml</value>
+                <value>model/Fridge.hbm.xml</value>
+                <value>model/DailyNutrition.hbm.xml</value>
+                <value>model/DailyChange.hbm.xml</value>
+			</list>
+		</property>
+		<!-- Hibernate SessionFactory -->
+		<property name="hibernateProperties">
+			<value>
+				hibernate.dialect=org.hibernate.dialect.MySQLInnoDBDialect
+				hibernate.show_sql=true
+				hibernate.format_sql=true
+			</value>
+		</property>
+	</bean>
+
+	<!-- HibernateTransactionManager -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager"
+		p:sessionFactory-ref="sessionFactory" />
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+	<tx:annotation-driven/>
+	
+	<aop:config>
+		<!-- appService Bean -->
+		<aop:pointcut id="beanPointcut" expression="execution(* service..*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="beanPointcut" />
+	</aop:config>
+
+    <!-- 
+
+    <mongo:mongo id="mongo" host="localhost" port="27017"/>
+    <mongo:db-factory id="mongoDbFactory" dbname="bridge"
+        mongo-ref="mongo" />
+    
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+         <constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+    </bean>
+    
+    -->
+    
+    <!-- ============================================================= -->
+    
+    <!-- DAO Bean -->
+    <bean id="baseDao" class="dao.impl.BaseDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <!--
+        <property name="mongoTemplate" ref="mongoTemplate" />
+        -->
+    </bean>
+    <bean id="userDao" class="dao.impl.UserDaoImpl" parent="baseDao"/>
+    <bean id="fridgeDao" class="dao.impl.FridgeDaoImpl" parent="baseDao"/>
+    <bean id="itemDao" class="dao.impl.ItemDaoImpl" parent="baseDao"/>
+    <bean id="dailyNutritionDao" class="dao.impl.DailyNutritionDaoImpl" parent="baseDao"/>
+    <bean id="dailyChangeDao" class="dao.impl.DailyChangeDaoImpl" parent="baseDao"/>
+    <bean id="userFridgeRelationshipDao" class="dao.impl.UserFridgeRelationshipDaoImpl" parent="baseDao"/>
+    <bean id="fridgeItemRelationshipDao" class="dao.impl.FridgeItemRelationshipDaoImpl" parent="baseDao"/>
+    <bean id="tokenDao" class="dao.impl.TokenDaoImpl">
+        <property name="redisTemplate" ref="redisTemplate" />
+    </bean>
+
+    <!-- ============================================================= -->
+
+    <!-- Service -->
+    <bean id="userService" class="service.impl.UserServiceImpl">
+        <property name="userDao" ref="userDao" />
+        <property name="tokenDao" ref="tokenDao" />
+    </bean>
+    <bean id="itemService" class="service.impl.ItemServiceImpl">
+        <property name="itemDao" ref="itemDao" />
+    </bean>
+    <bean id="fridgeService" class="service.impl.FridgeServiceImpl">
+        <property name="fridgeDao" ref="fridgeDao" />
+        <property name="itemDao" ref="itemDao" />
+        <property name="fridgeItemRelationshipDao" ref="fridgeItemRelationshipDao" />
+        <property name="dailyChangeDao" ref="dailyChangeDao" />
+    </bean>
+    <bean id="dailyNutritionService" class="service.impl.DailyNutritionServiceImpl">
+        <property name="dailyNutritionDao" ref="dailyNutritionDao" />
+    </bean>
+    
+    <!-- ============================================================= -->
+    
+    <!-- Action -->
+    <bean id="userAction" class="action.manage.UserAction">
+        <property name="userService" ref="userService" />
+    </bean>
+    
+    <!-- only for test -->
+<!--     <bean id="testAction" class="action.TestAction">
+        <property name="userService" ref="userService"/>
+    </bean> -->
+    
+</beans>

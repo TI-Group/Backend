@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Struts2 DTD -->
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <constant name="struts.i18n.encoding" value="utf-8" />
+    <constant name="struts.devMode" value="true" />
+    
+    <!-- 后台管理接口 -->
+    <package name="manageUser" extends="struts-default,json-default" namespace="/manageUser">
+        <action name="*" class="action.manage.UserAction" method="{1}">
+            <result name="success" type="json">
+                <param name="root">params</param>
+            </result>
+            <allowed-methods>
+                allUsers,addUser,updateUser,deleteUser
+            </allowed-methods>
+        </action>
+    </package>
+    <package name="manageItem" extends="struts-default,json-default" namespace="/manageItem">
+        <action name="*" class="action.manage.ItemAction" method="{1}">
+            <result name="success" type="json">
+                <param name="root">params</param>
+            </result>
+            <allowed-methods>
+                allItems,addItem,updateItem,deleteItem
+            </allowed-methods>
+        </action>
+    </package>
+    <package name="manageFridge" extends="struts-default,json-default" namespace="/manageFridge">
+        <action name="*" class="action.manage.FridgeAction" method="{1}">
+            <result name="success" type="json">
+                <param name="root">params</param>
+            </result>
+            <allowed-methods>
+                allFridges,addFridge,updateFridge,deleteFridge
+            </allowed-methods>
+        </action>
+    </package>
+    <package name="manageDailyNutrition" extends="struts-default,json-default" namespace="/manageDailyNutrition">
+        <action name="*" class="action.manage.DailyNutritionAction" method="{1}">
+            <result name="success" type="json">
+                <param name="root">params</param>
+            </result>
+            <allowed-methods>
+                all,addDailyNutrition,updateDailyNutrition,deleteDailyNutrition
+            </allowed-methods>
+        </action>
+    </package>
+    
+    <package name="userAction"  extends="struts-default,json-default" namespace="/userAction">
+        <action name="*" class="action.user.UserAction" method="{1}">
+            <result name="success" type="json">
+                <param name="root">params</param>
+            </result>
+            <allowed-methods>
+                regex:.*
+            </allowed-methods>
+        </action>
+    </package>
+    
+    <!-- only for test -->
+    <package name="testAction" extends="struts-default,json-default" namespace="/testAction">
+        <action name="*" class="action.TestAction" method="{1}">
+            <result name="success" type="json">
+                <param name="root">params</param>
+            </result>
+            <allowed-methods>
+                regex:.*
+            </allowed-methods>
+        </action>
+    </package>
+</struts>
