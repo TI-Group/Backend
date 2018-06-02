@@ -51,6 +51,7 @@
 	}
     $("#loginForm").ajaxForm(function(data){  
         if (data.result === true) location.href="user.html";
+        else alert('Wrong username or password!');
     });  
 </script>
 
