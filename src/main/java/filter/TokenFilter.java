@@ -33,7 +33,7 @@ public class TokenFilter implements Filter{
 			throws IOException, ServletException {
 		HttpServletRequest req=(HttpServletRequest)request;  
 		String uri=req.getRequestURI();
-		if(uris.contains(uri)){
+		if(!uris.contains(uri)){
 			chain.doFilter(request,response);
 			return;
 		}
