@@ -54,23 +54,21 @@ server side
     - 返回数据示例: 
         ```
         {
+            success: true,
+            result: [
             {
-                success: true,
-                result: [
-                {
-                    itemId: 1,
-                    itemName: '苹果',
-                    amount: 1,
-                    remainTime: 1  // 预计还能存放的时间
-                },
-                {
-                    itemId: 2,
-                    itemName: '橘子',
-                    amount: 1,
-                    remainTime: 1  // 预计还能存放的时间
-                }
-                ]
+                itemId: 1,
+                itemName: '苹果',
+                amount: 1,
+                remainTime: 1  // 预计还能存放的时间
+            },
+            {
+                itemId: 2,
+                itemName: '橘子',
+                amount: 1,
+                remainTime: 1  // 预计还能存放的时间
             }
+            ]
         }
         ```
 
