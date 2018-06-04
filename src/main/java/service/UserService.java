@@ -1,6 +1,8 @@
 package service;
 
 import java.util.List;
+import java.util.Map;
+
 import model.User;
 
 public interface UserService extends BaseService {
@@ -24,6 +26,6 @@ public interface UserService extends BaseService {
     public boolean deleteUser(int userId);
 
     public boolean adminLogin(String username, String password);
-    public String userLogin(String tel, String password);
+    public Map<String, Object> userLogin(String tel, String password);
     //public boolean userSignup(String phone, String username, String password);
 }
