@@ -56,6 +56,7 @@ server side
         }
         ```
     - 参照src/main/webapp/test/testfile.html
+    - 在本地测试时需修改src/main/java/dao/impl/FridgeDaoImpl.java的fileBasePath变量
 
 - 获得已存储的冰箱图片
     - url：'/fridge/fridgeAction/getFridgeImage'
@@ -67,6 +68,7 @@ server side
         ```
     - 返回数据格式：二进制流，content-type为image/*
     - 参照src/main/webapp/test/testfile.html
+    - 在本地测试时需修改src/main/java/dao/impl/FridgeDaoImpl.java的fileBasePath变量
         
         
 ## 尚未实现的接口
