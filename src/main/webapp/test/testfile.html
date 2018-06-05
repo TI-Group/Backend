@@ -1,0 +1,25 @@
+<html>
+    <body>
+        <form id="testForm" onsubmit="return testSubmit()" enctype="multipart/form-data" method="post">
+            <input id="fridgeId" name="fridgeId" value="0"></input>
+            <input id="userId" name="userId" value="0"></input>
+            <input id="image" type="file" name="uploadImage" value=""></input>
+            <input type="submit" value="提交">
+        </form>
+        <img src="/fridge/fridgeAction/getFridgeImage?fridgeId=0"></img>
+        <script>
+            function testSubmit() {
+                var newFormData = new FormData(document.getElementById("testForm"));
+                var xmlhttp=new XMLHttpRequest();
+                xmlhttp.open("POST","/fridge/fridgeAction/openFridge",true);
+                xmlhttp.send(newFormData);
+                xmlhttp.onreadystatechange=function() {
+                    if(xmlhttp.readyState==4 && xmlhttp.status==200) {
+                        location.reload();
+                    }
+                }
+                return false;
+            }
+        </script>
+    </body>
+</html>

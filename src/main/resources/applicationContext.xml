@@ -46,20 +46,16 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
 		p:dataSource-ref="dataSource">
-		<property name="mappingResources">
+		<property name="mappingLocations">
 			<list>
-				<value>model/User.hbm.xml</value>
-                <value>model/Item.hbm.xml</value>
-                <value>model/Fridge.hbm.xml</value>
-                <value>model/DailyNutrition.hbm.xml</value>
-                <value>model/DailyChange.hbm.xml</value>
+				<value>classpath:/model/*.hbm.xml</value>
 			</list>
 		</property>
 		<!-- Hibernate SessionFactory -->
 		<property name="hibernateProperties">
 			<value>
 				hibernate.dialect=org.hibernate.dialect.MySQLInnoDBDialect
-				hibernate.show_sql=true
+				hibernate.show_sql=false
 				hibernate.format_sql=true
 			</value>
 		</property>
