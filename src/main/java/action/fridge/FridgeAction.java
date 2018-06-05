@@ -4,11 +4,15 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import action.BaseAction;
+import model.DailyChange;
+import model.ItemView;
+import service.FridgeItemService;
 import service.FridgeService;
 
 public class FridgeAction extends BaseAction {
@@ -18,9 +22,13 @@ public class FridgeAction extends BaseAction {
     
     @Autowired
     private FridgeService fridgeService;
+    @Autowired
+    private FridgeItemService fridgeItemService;
     
     private Integer fridgeId;
     private Integer userId;
+    private Integer itemId;
+    private Integer amount;
     private File uploadImage;    // 上传的文件对象
     private String uploadImageFileName;    // 上传的文件名
     private String uploadImageContentType;
@@ -42,6 +50,12 @@ public class FridgeAction extends BaseAction {
     public void setFridgeService(FridgeService fridgeService) {
         this.fridgeService = fridgeService;
     }
+    public FridgeItemService getFridgeItemService() {
+        return fridgeItemService;
+    }
+    public void setFridgeItemService(FridgeItemService fridgeItemService) {
+        this.fridgeItemService = fridgeItemService;
+    }
     public Integer getFridgeId() {
         return fridgeId;
     }
@@ -53,6 +67,18 @@ public class FridgeAction extends BaseAction {
     }
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+    public Integer getItemId() {
+        return itemId;
+    }
+    public void setItemId(Integer itemId) {
+        this.itemId = itemId;
+    }
+    public Integer getAmount() {
+        return amount;
+    }
+    public void setAmount(Integer amount) {
+        this.amount = amount;
     }
     public File getUploadImage() {
         return uploadImage;
@@ -108,4 +134,25 @@ public class FridgeAction extends BaseAction {
         return SUCCESS;
     }
 
+    public String getItems() {
+        this.params = new HashMap<String, Object>();
+        List<ItemView> list = fridgeItemService.getItemsOfFridge(userId, fridgeId);
+        this.params.put("success", true);
+        this.params.put("result", list);
+        return SUCCESS;
+    }
+    
+    public String changeItem() {
+        this.params = new HashMap<String, Object>();
+        this.params.put("success", fridgeItemService.changeItemOfFridge(userId, fridgeId, itemId, amount));
+        return SUCCESS;
+    }
+    
+    public String getDailyChange() {
+        this.params = new HashMap<String, Object>();
+        List<DailyChange> list = fridgeItemService.getDailyChangeOfFridge(userId, fridgeId);
+        this.params.put("success", true);
+        this.params.put("result", list);
+        return SUCCESS;
+    }
 }

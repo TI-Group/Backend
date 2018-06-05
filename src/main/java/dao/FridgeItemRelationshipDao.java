@@ -9,4 +9,5 @@ public interface FridgeItemRelationshipDao extends BaseDao {
 	List<FridgeItemRelationship> getAllFridgeItemRelationship();
 	List<FridgeItemRelationship> getItemsInFridge(int fridge);
 	List<FridgeItemRelationship> getItemsInFridgeWithRemainTimeLowerThan(int fridge, int remainTime);
+	FridgeItemRelationship getItemInFridgeByItemId(int fridge, int item);
 }

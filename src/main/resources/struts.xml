@@ -73,7 +73,7 @@
                 <param name="root">params</param>
             </result>
             <allowed-methods>
-                openFridge
+                openFridge,getItems,changeItem,getDailyChange
             </allowed-methods>
         </action>
     </package>

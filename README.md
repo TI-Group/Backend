@@ -69,18 +69,16 @@ server side
     - 返回数据格式：二进制流，content-type为image/*
     - 参照src/main/webapp/test/testfile.html
     - 在本地测试时需修改src/main/java/dao/impl/FridgeDaoImpl.java的fileBasePath变量
-        
-        
-## 尚未实现的接口
+
 - 查看某一冰箱内所有物品
     - url: 'fridge/fridgeAction/getItems'
     - 方法: get
     - 传入数据示例:
         ```
         {
-            user_id: 1, // 用户id
+            userId: 1, // 用户id
             token: 'WLaO4VHgwHZyR2hEjYxY1Q==', // token
-            fridge: 1 // 冰箱id
+            fridgeId: 1 // 冰箱id
         }
         ```
     - 返回数据示例: 
@@ -110,9 +108,9 @@ server side
     - 传入数据示例:
         ```
         {
-            user_id: 1, // 用户id
+            userId: 1, // 用户id
             token: 'WLaO4VHgwHZyR2hEjYxY1Q==', // token
-            fridge: 1 // 冰箱id,
+            fridgeId: 1 // 冰箱id,
             itemId: 1,
             amount: -1
         }
@@ -130,9 +128,9 @@ server side
     - 传入数据示例:
         ```
         {
-            user_id: 1, // 用户id
+            userId: 1, // 用户id
             token: 'WLaO4VHgwHZyR2hEjYxY1Q==', // token
-            fridge: 1 // 冰箱id
+            fridgeId: 1 // 冰箱id
         }
         ```
     - 返回数据示例:
@@ -147,7 +145,7 @@ server side
                 itemId: 1,
                 userId: 1,
                 amount: 1,
-                time: 
+                time: "2018-06-05T22:24:47"
             }
             ]
         }
