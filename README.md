@@ -39,6 +39,36 @@ server side
         }
         ```
 
+- 开冰箱门时上传数据
+    - url：'/fridge/fridgeAction/openFridge'
+    - 方法：post
+    - 传入数据格式：multipart/form-data
+        ```
+        包含的字段：
+        fridgeId：冰箱id
+        userId：用户id
+        uploadImage：图片的二进制数据
+        ```
+    - 返回数据示例：
+        ```
+        {
+            result: true
+        }
+        ```
+    - 参照src/main/webapp/test/testfile.html
+
+- 获得已存储的冰箱图片
+    - url：'/fridge/fridgeAction/getFridgeImage'
+    - 方法：get或post
+    - 传入数据格式：application/x-www-form-urlencoded
+        ```
+        包含的字段：
+        fridgeId：冰箱id
+        ```
+    - 返回数据格式：二进制流，content-type为image/*
+    - 参照src/main/webapp/test/testfile.html
+        
+        
 ## 尚未实现的接口
 - 查看某一冰箱内所有物品
     - url: 'fridge/fridgeAction/getItems'

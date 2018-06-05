@@ -34,3 +34,11 @@ DailyNutritionService管理用户的每日营养记录（对应DailyNutrition表
 数据库fridgeItemRelationship表添加了amount字段
 完成fridgeServiceImpl.openFridge方法，当冰箱门打开时更新相关的数据表
 预留了冰箱内部图片识别的接口（common.util.ImageUtil.imageToItem函数），
+
+==================================================================
+
+2018/6/5 -- by hz
+
+修复了applicationContext.xml未导入所有的*.hbm.xml的错误
+修改了service.FridgeService.openFridge函数的实现
+添加了冰箱图片的上传与获取
