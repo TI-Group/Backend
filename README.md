@@ -112,7 +112,7 @@ server side
             token: 'WLaO4VHgwHZyR2hEjYxY1Q==', // token
             fridgeId: 1 // 冰箱id,
             itemId: 1,
-            amount: -1
+            amount: 5  // 修改后的数量
         }
         ```
     - 返回数据示例:

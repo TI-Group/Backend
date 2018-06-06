@@ -80,12 +80,12 @@ public class FridgeItemServiceImpl implements FridgeItemService {
         try {
             FridgeItemRelationship fi = fridgeItemRelationshipDao.getItemInFridgeByItemId(fridge, itemId);
             if (fi == null) return false;
-            fi.setAmount(fi.getAmount() + amount);
             DailyChange dc = new DailyChange();
             dc.setFridgeId(fridge);
             dc.setItemId(itemId);
-            dc.setAmount(amount);
+            dc.setAmount(amount - fi.getAmount());
             dc.setUserId(user);
+            fi.setAmount(amount);
             fridgeItemRelationshipDao.update(fi);
             dailyChangeDao.save(dc);
             return true;
