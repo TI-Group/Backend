@@ -155,7 +155,7 @@ server side
         ```
         
 - 设置用户和冰箱的关联
-    - url：'/fridge/fridgeAction/setRelationToFridge'
+    - url：'/fridge/userAction/setRelationToFridge'
     - 方法：get或post
     - 传入数据示例：
         ```
@@ -173,7 +173,7 @@ server side
         ```
         
 - 获得和用户关联的所有冰箱
-    - url：'/fridge/fridgeAction/setRelationToFridge'
+    - url：'/fridge/userAction/setRelationToFridge'
     - 方法：get或post
     - 传入数据示例：
         ```
@@ -198,7 +198,7 @@ server side
         ```
         
 - 取消用户和某个冰箱的关系
-    - url：'/fridge/fridgeAction/delRelationToFridge'
+    - url：'/fridge/userAction/delRelationToFridge'
     - 传入数据示例：
         ```
         {
