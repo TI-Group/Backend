@@ -10,6 +10,7 @@ public interface FridgeService {
     boolean addFridge(Fridge f);
     boolean updateFridge(Fridge f);
     boolean deleteFridge(int fridgeId);
-    
+ 
+    byte[] getFridgeImage(int fridgeId);
     boolean openFridge(int fridgeId, int userId, File image);
 }

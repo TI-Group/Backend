@@ -84,9 +84,7 @@ public class UserAction extends BaseAction {
 
     //action
     public String userLogin() {
-        this.params = new HashMap<String, Object>();
-        String result = this.userService.userLogin(this.username,PasswordUtil.getEncryptedPassword(this.password));
-        this.params.put("result", result);
+        this.params = this.userService.userLogin(this.username,PasswordUtil.getEncryptedPassword(this.password));
         return SUCCESS;
     }
 

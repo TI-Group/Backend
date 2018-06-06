@@ -60,6 +60,24 @@
         </action>
     </package>
     
+    <package name="fridgeAction" extends="struts-default,json-default" namespace="/fridgeAction">
+        <action name="getFridgeImage" class="action.fridge.FridgeAction" method="getFridgeImage">
+            <result name="success" type="stream">
+                <param name="contentDisposition">inline;filename="${downloadImageFileName}"</param>
+                <param name="inputName">downloadImage</param>
+                <param name="contentType">${downloadImageContentType}</param> 
+            </result>
+        </action>
+        <action name="*" class="action.fridge.FridgeAction" method="{1}">
+            <result name="success" type="json">
+                <param name="root">params</param>
+            </result>
+            <allowed-methods>
+                openFridge,getItems,changeItem,getDailyChange
+            </allowed-methods>
+        </action>
+    </package>
+    
     <!-- only for test -->
     <package name="testAction" extends="struts-default,json-default" namespace="/testAction">
         <action name="*" class="action.TestAction" method="{1}">

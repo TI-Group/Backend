@@ -1,6 +1,8 @@
 package service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import common.constant.UserRole;
 import dao.UserDao;
@@ -52,19 +54,25 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
     }
 
     @Override
-    public String userLogin(String tel, String password){
+    public Map<String, Object>  userLogin(String tel, String password){
+        Map<String, Object> result = new HashMap<>();
         User user = this.userDao.getUserByTel(tel);
-        if (user.getRole() == UserRole.COMMON && password.equals(user.getPassword()) && user != null){
-            return this.tokenDao.createToken(user.getUserId());
+        int id = 0;
+        String token = null;
+        if (user != null && user.getRole() == UserRole.COMMON && password.equals(user.getPassword())){
+            token = this.tokenDao.createToken(user.getUserId());
+            id = user.getUserId();
         }
-        return null;
+        result.put("user_id", id);
+        result.put("token", token);
+        return result;
     }
     @Override
     public boolean adminLogin(String username, String password){
         User user = this.userDao.getUserByUsername(username);
-        if (user.getRole() == UserRole.ADMIN 
-                && password.equals(user.getPassword()) 
-                && user != null){
+        if (user != null
+                && user.getRole() == UserRole.ADMIN 
+                && password.equals(user.getPassword())){
             return true;
         }
         return false;

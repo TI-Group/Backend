@@ -42,5 +42,14 @@ public class FridgeItemRelationshipDaoImpl extends BaseDaoImpl implements Fridge
         List<FridgeItemRelationship> fridgeItems = query.list();
         return fridgeItems;
 	}
+
+    @Override
+    public FridgeItemRelationship getItemInFridgeByItemId(int fridge, int item) {
+        String hql = "from FridgeItemRelationship fi where fi.fridgeId = :fridgeId and fi.itemId = :itemId";
+        Query query = getSession().createQuery(hql).setParameter("fridgeId", fridge).setParameter("itemId", item);
+        List<FridgeItemRelationship> fridgeItems = query.list();
+        FridgeItemRelationship fridgeItem = fridgeItems.size() == 1 ? fridgeItems.get(0) : null;
+        return fridgeItem;
+    }
     
 }
