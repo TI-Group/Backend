@@ -129,8 +129,8 @@ public class FridgeAction extends BaseAction {
     
     public String openFridge() {
         this.params = new HashMap<String, Object>();
-        boolean result = this.fridgeService.openFridge(this.fridgeId, this.userId, this.uploadImage);
-        this.params.put("result", result);
+        boolean success = this.fridgeService.openFridge(this.fridgeId, this.userId, this.uploadImage);
+        this.params.put("success", success);
         return SUCCESS;
     }
 

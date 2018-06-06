@@ -9,4 +9,6 @@ public interface UserFridgeRelationshipDao extends BaseDao {
 	List<UserFridgeRelationship> getAllUserFridgeRelationship();
 	List<UserFridgeRelationship> getFridgesOfUser(int user);
 	List<UserFridgeRelationship> getUsersOfFridge(int fridge);
+	
+	UserFridgeRelationship getRelationshipByUserAndFridge(int userId, int fridgeId);
 }

@@ -118,6 +118,8 @@
     <bean id="userService" class="service.impl.UserServiceImpl">
         <property name="userDao" ref="userDao" />
         <property name="tokenDao" ref="tokenDao" />
+        <property name="fridgeDao" ref="fridgeDao" />
+        <property name="userFridgeRelationshipDao" ref="userFridgeRelationshipDao" />
     </bean>
     <bean id="itemService" class="service.impl.ItemServiceImpl">
         <property name="itemDao" ref="itemDao" />
