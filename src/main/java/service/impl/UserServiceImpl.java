@@ -6,13 +6,18 @@ import java.util.Map;
 
 import common.constant.UserRole;
 import dao.UserDao;
+import dao.UserFridgeRelationshipDao;
+import dao.FridgeDao;
 import dao.TokenDao;
 import model.User;
+import model.UserFridgeRelationship;
 import service.UserService;
 
 public class UserServiceImpl extends BaseServiceImpl implements UserService {
     private UserDao userDao;
-    private TokenDao tokenDao; 
+    private TokenDao tokenDao;
+    private FridgeDao fridgeDao;
+    private UserFridgeRelationshipDao userFridgeRelationshipDao;
     
     /* ======================================================== */
 
@@ -27,6 +32,18 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
     }
     public void setTokenDao(TokenDao tokenDao) {
         this.tokenDao = tokenDao;
+    }
+    public FridgeDao getFridgeDao() {
+        return fridgeDao;
+    }
+    public void setFridgeDao(FridgeDao fridgeDao) {
+        this.fridgeDao = fridgeDao;
+    }
+    public UserFridgeRelationshipDao getUserFridgeRelationshipDao() {
+        return userFridgeRelationshipDao;
+    }
+    public void setUserFridgeRelationshipDao(UserFridgeRelationshipDao userFridgeRelationshipDao) {
+        this.userFridgeRelationshipDao = userFridgeRelationshipDao;
     }
     
     /* ======================================================== */
@@ -78,4 +95,52 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
         return false;
     }
     
+    @Override
+    public Map<String, Object> setRelationToFridge(int userId, int fridgeId) {
+        Map<String, Object> params = new HashMap<String, Object>();
+        UserFridgeRelationship ufr = this.userFridgeRelationshipDao.getRelationshipByUserAndFridge(userId, fridgeId);
+        if(this.userDao.getUserById(userId) == null) {
+            params.put("success", false);
+            params.put("message", "user not exists");
+            return params;
+        }
+        if(this.fridgeDao.getFridgeById(fridgeId) == null) {
+            params.put("success", false);
+            params.put("message", "fridge not exists");
+            return params;
+        }
+        if(ufr != null) {
+            params.put("success", false);
+            params.put("message", "relationship already exists");
+            return params;
+        }
+        this.userFridgeRelationshipDao.save(new UserFridgeRelationship(0, fridgeId, userId));
+        params.put("success", true);
+        return params;
+    }
+    @Override
+    public Map<String, Object> getRelationToFridge(int userId) {
+        Map<String, Object> params = new HashMap<String, Object>();
+        List<UserFridgeRelationship> lufr = this.userFridgeRelationshipDao.getFridgesOfUser(userId);
+        if(lufr == null) {
+            params.put("success", false);
+            return params;
+        }
+        params.put("success", true);
+        params.put("result", lufr);
+        return params;
+    }
+    @Override
+    public Map<String, Object> delRelationToFridge(int userId, int fridgeId) {
+        Map<String, Object> params = new HashMap<String, Object>();
+        UserFridgeRelationship ufr = this.userFridgeRelationshipDao.getRelationshipByUserAndFridge(userId, fridgeId);
+        if(ufr == null) {
+            params.put("success", false);
+            params.put("message", "relationship doesn't exists");
+            return params;
+        }
+        this.userFridgeRelationshipDao.delete(ufr);
+        params.put("success", true);
+        return params;
+    }
 }

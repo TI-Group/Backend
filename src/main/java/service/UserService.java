@@ -28,4 +28,8 @@ public interface UserService extends BaseService {
     public boolean adminLogin(String username, String password);
     public Map<String, Object> userLogin(String tel, String password);
     //public boolean userSignup(String phone, String username, String password);
+    
+    public Map<String, Object> setRelationToFridge(int userId, int fridgeId);
+    public Map<String, Object> getRelationToFridge(int userId);
+    public Map<String, Object> delRelationToFridge(int userId, int fridgeId);
 }

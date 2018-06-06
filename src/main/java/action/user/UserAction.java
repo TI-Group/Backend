@@ -22,6 +22,10 @@ public class UserAction extends BaseAction {
     private String tel;
     private Integer role;
 
+    private Integer fridgeId;
+    
+    /* ======================================================= */
+    
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
@@ -82,6 +86,16 @@ public class UserAction extends BaseAction {
         this.role = role;
     }
 
+    public Integer getFridgeId() {
+        return fridgeId;
+    }
+
+    public void setFridgeId(Integer fridgeId) {
+        this.fridgeId = fridgeId;
+    }
+
+    /* ========================================================== */
+    
     //action
     public String userLogin() {
         this.params = this.userService.userLogin(this.username,PasswordUtil.getEncryptedPassword(this.password));
@@ -100,6 +114,19 @@ public class UserAction extends BaseAction {
         User user = new User(0, this.username, PasswordUtil.getEncryptedPassword(this.password), this.tel, UserRole.values()[this.role]);
         boolean result = this.userService.addUser(user);
         this.params.put("result", result);
+        return SUCCESS;
+    }
+    
+    public String setRelationToFridge() {
+        this.params = this.userService.setRelationToFridge(this.userId, this.fridgeId);
+        return SUCCESS;
+    }
+    public String getRelationToFridge() {
+        this.params = this.userService.getRelationToFridge(this.userId);
+        return SUCCESS;
+    }
+    public String delRelationToFridge() {
+        this.params = this.userService.delRelationToFridge(this.userId, this.fridgeId);
         return SUCCESS;
     }
 }

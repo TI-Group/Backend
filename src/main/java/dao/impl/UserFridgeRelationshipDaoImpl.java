@@ -43,4 +43,14 @@ public class UserFridgeRelationshipDaoImpl extends BaseDaoImpl implements UserFr
         return userFridges;
 	}
     
+	@Override
+	public UserFridgeRelationship getRelationshipByUserAndFridge(int userId, int fridgeId) {
+	    String hql = "from UserFridgeRelationship uf where uf.userId = :userId and uf.fridgeId = :fridgeId";
+        Query query = getSession().createQuery(hql);
+        query.setParameter("userId", userId);
+        query.setParameter("fridgeId", fridgeId);
+        List<UserFridgeRelationship> userFridges = query.list();
+        UserFridgeRelationship userFridge = userFridges.size() >= 1 ? userFridges.get(0) : null;
+        return userFridge;
+	}
 }

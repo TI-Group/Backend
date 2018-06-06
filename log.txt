@@ -42,3 +42,10 @@ DailyNutritionService管理用户的每日营养记录（对应DailyNutrition表
 修复了applicationContext.xml未导入所有的*.hbm.xml的错误
 修改了service.FridgeService.openFridge函数的实现
 添加了冰箱图片的上传与获取
+
+==================================================================
+
+2018/6/6 -- by hz
+
+添加了 用户查看、添加、删除与冰箱的关联 的功能
+修改了部分接口的定义
