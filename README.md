@@ -219,10 +219,8 @@ server side
     - 传入数据示例：
         ```
         {
-            userId: 1,
             fridgeId: 1,
             itemName: 'name',
-            token: 'WLaO4VHgwHZyR2hEjYxY1Q=='
         }
         ```
     - 返回数据示例：
@@ -240,7 +238,6 @@ server side
             userId: 1,
             fridgeId: 1,
             itemName: 'name',
-            token: 'WLaO4VHgwHZyR2hEjYxY1Q=='
         }
         ```
     - 返回数据示例：
