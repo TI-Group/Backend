@@ -249,3 +249,36 @@ server side
             result: "success" (失败则为"fail")
         }
         ```
+
+- 添加物品
+    - url: '/fridge/fridgeAction/addItem',
+    - 传入数据示例：
+        ```
+        {
+            fridgeId: 1,
+            itemName: 'name',
+            amount: 1
+        }
+        ```
+    - 返回数据示例：
+        ```
+        {
+            success: true (失败则为false)
+        }
+        ```
+
+- 删除物品
+    - url: '/fridge/fridgeAction/deleteItem',
+    - 传入数据示例：
+        ```
+        {
+            fridgeId: 1,
+            itemName: 'name'
+        }
+        ```
+    - 返回数据示例：
+        ```
+        {
+            success: true (失败则为false)
+        }
+        ```
