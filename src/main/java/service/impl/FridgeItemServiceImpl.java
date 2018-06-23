@@ -9,6 +9,7 @@ import dao.ItemDao;
 import dao.UserFridgeRelationshipDao;
 import model.DailyChange;
 import model.FridgeItemRelationship;
+import model.Item;
 import model.ItemView;
 import model.UserFridgeRelationship;
 import service.FridgeItemService;
@@ -68,7 +69,7 @@ public class FridgeItemServiceImpl implements FridgeItemService {
         List<FridgeItemRelationship> items = fridgeItemRelationshipDao.getItemsInFridge(fridge);
         List<ItemView> result = new ArrayList<>();
         for (FridgeItemRelationship i : items) {
-            ItemView iv = new ItemView(i.getId(), itemDao.getItemById(i.getId()).getName(), i.getAmount(), i.getRemainTime());
+            ItemView iv = new ItemView(i.getItemId(), itemDao.getItemById(i.getItemId()).getName(), i.getAmount(), i.getRemainTime());
             result.add(iv);
         }
         return result;
@@ -99,6 +100,25 @@ public class FridgeItemServiceImpl implements FridgeItemService {
     public List<DailyChange> getDailyChangeOfFridge(int user, int fridge) {
         if (!checkUser(user, fridge)) return null;
         return dailyChangeDao.getDailyChangeOfFridge(fridge);
+    }
+
+    @Override
+    public boolean addItemIntoFridge(int fridge, String item, int amount) {
+        Item it = itemDao.getItemByName(item);
+        if (it == null) return false;
+        FridgeItemRelationship fi = fridgeItemRelationshipDao.getItemInFridgeByItemId(fridge, it.getItemId());
+        if (fi != null) return false;
+        fi = new FridgeItemRelationship(it.getItemId(), amount, fridge, it.getShelflife());
+        return fridgeItemRelationshipDao.save(fi);
+    }
+
+    @Override
+    public boolean deleteItemFromFridge(int fridge, String item) {
+        Item it = itemDao.getItemByName(item);
+        if (it == null) return false;
+        FridgeItemRelationship fi = fridgeItemRelationshipDao.getItemInFridgeByItemId(fridge, it.getItemId());
+        if (fi == null) return false;
+        return fridgeItemRelationshipDao.delete(fi);
     }
 
 }

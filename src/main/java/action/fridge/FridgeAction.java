@@ -36,6 +36,8 @@ public class FridgeAction extends BaseAction {
     private String downloadImageFileName;    // 供下载的文件名
     private String downloadImageContentType;
     
+    private String itemName;
+    
     /* ============================================================ */
     
     public Map<String, Object> getParams() {
@@ -116,9 +118,16 @@ public class FridgeAction extends BaseAction {
     public void setDownloadImageContentType(String downloadImageContentType) {
         this.downloadImageContentType = downloadImageContentType;
     }
+
+    public String getItemName() {
+        return itemName;
+    }
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
     
     /* ============================================================ */
-
+    
     public String getFridgeImage() {
         byte[] buffer = this.fridgeService.getFridgeImage(this.fridgeId);
         this.downloadImage = (buffer != null)? new ByteArrayInputStream(buffer) : new ByteArrayInputStream(new byte[0]);
@@ -155,4 +164,17 @@ public class FridgeAction extends BaseAction {
         this.params.put("result", list);
         return SUCCESS;
     }
+    
+    public String addItem() {
+        this.params = new HashMap<String, Object>();
+        this.params.put("success",  fridgeItemService.addItemIntoFridge(fridgeId, itemName, amount));
+        return SUCCESS;
+    }
+    
+    public String deleteItem() {
+        this.params = new HashMap<String, Object>();
+        this.params.put("success",  fridgeItemService.deleteItemFromFridge(fridgeId, itemName));
+        return SUCCESS;
+    }
+    
 }
