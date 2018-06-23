@@ -36,6 +36,8 @@ public class FridgeAction extends BaseAction {
     private String downloadImageFileName;    // 供下载的文件名
     private String downloadImageContentType;
     
+    private String itemName;
+    
     /* ============================================================ */
     
     public Map<String, Object> getParams() {
@@ -116,9 +118,16 @@ public class FridgeAction extends BaseAction {
     public void setDownloadImageContentType(String downloadImageContentType) {
         this.downloadImageContentType = downloadImageContentType;
     }
+
+    public String getItemName() {
+        return itemName;
+    }
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
     
     /* ============================================================ */
-
+    
     public String getFridgeImage() {
         byte[] buffer = this.fridgeService.getFridgeImage(this.fridgeId);
         this.downloadImage = (buffer != null)? new ByteArrayInputStream(buffer) : new ByteArrayInputStream(new byte[0]);
@@ -127,12 +136,14 @@ public class FridgeAction extends BaseAction {
         return SUCCESS;
     }
     
+    /*
     public String openFridge() {
         this.params = new HashMap<String, Object>();
         boolean success = this.fridgeService.openFridge(this.fridgeId, this.userId, this.uploadImage);
         this.params.put("success", success);
         return SUCCESS;
     }
+    */
 
     public String getItems() {
         this.params = new HashMap<String, Object>();
@@ -153,6 +164,32 @@ public class FridgeAction extends BaseAction {
         List<DailyChange> list = fridgeItemService.getDailyChangeOfFridge(userId, fridgeId);
         this.params.put("success", true);
         this.params.put("result", list);
+        return SUCCESS;
+    }
+    
+    public String addItem() {
+        this.params = new HashMap<String, Object>();
+        this.params.put("success",  fridgeItemService.addItemIntoFridge(fridgeId, itemName, amount));
+        return SUCCESS;
+    }
+    
+    public String deleteItem() {
+        this.params = new HashMap<String, Object>();
+        this.params.put("success",  fridgeItemService.deleteItemFromFridge(fridgeId, itemName));
+        return SUCCESS;
+    }
+    
+    public String increaseItem() {
+        this.params = new HashMap<String, Object>();
+        boolean r = this.fridgeItemService.increaseItem(fridgeId, itemName);
+        this.params.put("result", r ? "success" : "fail");
+        return SUCCESS;
+    }
+    
+    public String decreaseItem() {
+        this.params = new HashMap<String, Object>();
+        boolean r = this.fridgeItemService.decreaseItem(userId, fridgeId, itemName);
+        this.params.put("result", r ? "success" : "fail");
         return SUCCESS;
     }
 }
