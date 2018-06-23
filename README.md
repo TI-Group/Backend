@@ -213,3 +213,39 @@ server side
             success: true
         }
         ```
+
+- 冰箱某个物品数量加一
+    - url：'/fridge/userAction/increaseItem'
+    - 传入数据示例：
+        ```
+        {
+            userId: 1,
+            fridgeId: 1,
+            itemName: 'name',
+            token: 'WLaO4VHgwHZyR2hEjYxY1Q=='
+        }
+        ```
+    - 返回数据示例：
+        ```
+        {
+            result: "success" (失败则为"fail")
+        }
+        ```
+
+- 冰箱某个物品数量减一，同时记录dailychange
+    - url：'/fridge/userAction/decreaseItem'
+    - 传入数据示例：
+        ```
+        {
+            userId: 1,
+            fridgeId: 1,
+            itemName: 'name',
+            token: 'WLaO4VHgwHZyR2hEjYxY1Q=='
+        }
+        ```
+    - 返回数据示例：
+        ```
+        {
+            result: "success" (失败则为"fail")
+        }
+        ```
