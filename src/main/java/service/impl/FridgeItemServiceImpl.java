@@ -1,6 +1,8 @@
 package service.impl;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import dao.DailyChangeDao;
@@ -119,6 +121,41 @@ public class FridgeItemServiceImpl implements FridgeItemService {
         FridgeItemRelationship fi = fridgeItemRelationshipDao.getItemInFridgeByItemId(fridge, it.getItemId());
         if (fi == null) return false;
         return fridgeItemRelationshipDao.delete(fi);
+    }
+
+    @Override
+    public boolean increaseItem(int fridgeId, String itemName) {
+        Item it = this.itemDao.getItemByName(itemName);
+        if(it != null) {
+            FridgeItemRelationship fi = fridgeItemRelationshipDao.getItemInFridgeByItemId(fridgeId, it.getItemId());
+            if(fi != null) {
+                fi.setAmount(fi.getAmount()-1);
+                this.fridgeItemRelationshipDao.update(fi);
+            }
+            else {
+                fi = new FridgeItemRelationship(it.getItemId(), 1, fridgeId, it.getShelflife());
+                this.fridgeItemRelationshipDao.save(fi);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean decreaseItem(int userId, int fridgeId, String itemName) {
+        // 使冰箱里的某个物品数量减一，同时在dailychange中添加一条记录
+        Item it = this.itemDao.getItemByName(itemName);
+        if(it != null) {
+            FridgeItemRelationship fi = fridgeItemRelationshipDao.getItemInFridgeByItemId(fridgeId, it.getItemId());
+            if(fi != null && fi.getAmount() >= 1) {
+                fi.setAmount(fi.getAmount()-1);
+                this.fridgeItemRelationshipDao.update(fi);    // 即使数量为0，也不删掉记录
+                DailyChange dc = new DailyChange(fridgeId, it.getItemId(), userId, 1, (Timestamp)new Date());
+                this.dailyChangeDao.save(dc);
+                return true;
+            }
+        }
+        return false;
     }
 
 }

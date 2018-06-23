@@ -136,12 +136,14 @@ public class FridgeAction extends BaseAction {
         return SUCCESS;
     }
     
+    /*
     public String openFridge() {
         this.params = new HashMap<String, Object>();
         boolean success = this.fridgeService.openFridge(this.fridgeId, this.userId, this.uploadImage);
         this.params.put("success", success);
         return SUCCESS;
     }
+    */
 
     public String getItems() {
         this.params = new HashMap<String, Object>();
@@ -177,4 +179,17 @@ public class FridgeAction extends BaseAction {
         return SUCCESS;
     }
     
+    public String increaseItem() {
+        this.params = new HashMap<String, Object>();
+        boolean r = this.fridgeItemService.increaseItem(fridgeId, itemName);
+        this.params.put("result", r ? "success" : "fail");
+        return SUCCESS;
+    }
+    
+    public String decreaseItem() {
+        this.params = new HashMap<String, Object>();
+        boolean r = this.fridgeItemService.decreaseItem(userId, fridgeId, itemName);
+        this.params.put("result", r ? "success" : "fail");
+        return SUCCESS;
+    }
 }
