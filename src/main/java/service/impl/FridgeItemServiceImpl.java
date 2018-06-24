@@ -129,7 +129,7 @@ public class FridgeItemServiceImpl implements FridgeItemService {
         if(it != null) {
             FridgeItemRelationship fi = fridgeItemRelationshipDao.getItemInFridgeByItemId(fridgeId, it.getItemId());
             if(fi != null) {
-                fi.setAmount(fi.getAmount()-1);
+                fi.setAmount(fi.getAmount()+1);
                 this.fridgeItemRelationshipDao.update(fi);
             }
             else {

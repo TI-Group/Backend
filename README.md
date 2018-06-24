@@ -173,7 +173,7 @@ server side
         ```
         
 - 获得和用户关联的所有冰箱
-    - url：'/fridge/userAction/setRelationToFridge'
+    - url：'/fridge/userAction/getRelationToFridge'
     - 方法：get或post
     - 传入数据示例：
         ```
