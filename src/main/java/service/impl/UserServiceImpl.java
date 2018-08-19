@@ -1,5 +1,6 @@
 package service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,8 +8,12 @@ import java.util.Map;
 import common.constant.UserRole;
 import dao.UserDao;
 import dao.UserFridgeRelationshipDao;
+import dao.DailyChangeDao;
 import dao.FridgeDao;
+import dao.ItemDao;
 import dao.TokenDao;
+import model.DailyChange;
+import model.Item;
 import model.User;
 import model.UserFridgeRelationship;
 import service.UserService;
@@ -18,6 +23,8 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
     private TokenDao tokenDao;
     private FridgeDao fridgeDao;
     private UserFridgeRelationshipDao userFridgeRelationshipDao;
+    private DailyChangeDao dailyChangeDao;
+    private ItemDao itemDao;
     
     /* ======================================================== */
 
@@ -45,7 +52,19 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
     public void setUserFridgeRelationshipDao(UserFridgeRelationshipDao userFridgeRelationshipDao) {
         this.userFridgeRelationshipDao = userFridgeRelationshipDao;
     }
-    
+    public DailyChangeDao getDailyChangeDao() {
+        return dailyChangeDao;
+    }
+    public void setDailyChangeDao(DailyChangeDao dailyChangeDao) {
+        this.dailyChangeDao = dailyChangeDao;
+    }
+    public ItemDao getItemDao() {
+        return itemDao;
+    }
+    public void setItemDao(ItemDao itemDao) {
+        this.itemDao = itemDao;
+    }
+
     /* ======================================================== */
     
     // need admin role
@@ -143,4 +162,24 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
         params.put("success", true);
         return params;
     }
+    
+    @Override
+    public List<Map<String, Object>> getEatingRecords(int userId) {
+        List<Map<String, Object>> params = new ArrayList<Map<String, Object>>();
+        List<DailyChange> ld = this.dailyChangeDao.getDailyChangeOfUser(userId);
+        for(DailyChange d : ld) {
+            Item i = this.itemDao.getItemById(d.getItemId());
+            Map<String, Object> p = new HashMap<String, Object>();
+            p.put("changeId", d.getChangeId());
+            p.put("fridgeid", d.getChangeId());
+            p.put("itemId", d.getItemId());
+            p.put("itemName", i.getName());
+            p.put("userId", d.getUserId());
+            p.put("amount", d.getAmount());
+            p.put("time", d.getTime());
+            params.add(p);
+        }
+        return params;
+    }
+
 }

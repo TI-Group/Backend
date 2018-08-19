@@ -1,6 +1,7 @@
 package action.user;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import action.BaseAction;
@@ -127,6 +128,15 @@ public class UserAction extends BaseAction {
     }
     public String delRelationToFridge() {
         this.params = this.userService.delRelationToFridge(this.userId, this.fridgeId);
+        return SUCCESS;
+    }
+    
+    
+    public String getEatingRecords() {
+        this.params = new HashMap<String, Object>();
+        List<Map<String, Object>> list = userService.getEatingRecords(this.userId);
+        this.params.put("success", true);
+        this.params.put("result", list);
         return SUCCESS;
     }
 }

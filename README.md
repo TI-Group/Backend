@@ -279,3 +279,32 @@ server side
             success: true (失败则为false)
         }
         ```
+        
+- 获取某一用户今日的取出的物品（和getDailyChange相似，但是能获得一个用户的所有冰箱的数据，以及物品item的名称）
+    - url: 'fridge/userAction/getEatingRecords'
+    - 方法: get或post
+    - 传入数据示例:
+        ```
+        {
+            userId: 1, // 用户id
+            token: 'WLaO4VHgwHZyR2hEjYxY1Q==', // token，可以不传
+        }
+        ```
+    - 返回数据示例:
+        ```
+        {
+            success: true,
+            result: 
+            [
+            {
+                changeId: 1,
+                fridgeId: 1,
+                itemId: 1,
+                itemName: "grape"
+                userId: 1,
+                amount: 1,
+                time: "2018-06-05T22:24:47"
+            }
+            ]
+        }
+        ```
