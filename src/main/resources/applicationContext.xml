@@ -120,6 +120,8 @@
         <property name="tokenDao" ref="tokenDao" />
         <property name="fridgeDao" ref="fridgeDao" />
         <property name="userFridgeRelationshipDao" ref="userFridgeRelationshipDao" />
+        <property name="dailyChangeDao" ref="dailyChangeDao" />
+        <property name="itemDao" ref="itemDao" />
     </bean>
     <bean id="itemService" class="service.impl.ItemServiceImpl">
         <property name="itemDao" ref="itemDao" />

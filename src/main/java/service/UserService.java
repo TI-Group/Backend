@@ -32,4 +32,6 @@ public interface UserService extends BaseService {
     public Map<String, Object> setRelationToFridge(int userId, int fridgeId);
     public Map<String, Object> getRelationToFridge(int userId);
     public Map<String, Object> delRelationToFridge(int userId, int fridgeId);
+    
+    public List<Map<String, Object>> getEatingRecords(int userId);
 }
