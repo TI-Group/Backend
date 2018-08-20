@@ -91,7 +91,7 @@ public class ItemAction extends BaseAction {
     
     public String addItem() {
         this.params = new HashMap<String, Object>();
-        Item item = new Item(0, name, shelflife, calories);
+        Item item = new Item(0, name, shelflife, calories, null);
         boolean result = itemService.addItem(item);
         this.params.put("result", result);
         return SUCCESS;
@@ -99,7 +99,7 @@ public class ItemAction extends BaseAction {
     
     public String updateItem() {
         this.params = new HashMap<String, Object>();
-        Item item = new Item(itemId, name, shelflife, calories);
+        Item item = new Item(itemId, name, shelflife, calories, null);
         boolean result = itemService.updateItem(item);
         this.params.put("result", result);
         return SUCCESS;

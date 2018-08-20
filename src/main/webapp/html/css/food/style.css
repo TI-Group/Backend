@@ -1,0 +1,113 @@
+/* 顶部 */
+#top { padding: 20px; min-height: 72px; box-shadow: 0px 4px 20px #EEE; margin-bottom: 20px; }
+#top a { display: block; width: 72px; height: 72px; float: right; margin-left: 16px; }
+#top #foodImage { width: 72px; height: 72px; border-radius: 6px; background: #eaeaea; }
+#top #foodName { font-size: 21px; font-weight: bold; line-height: 30px; margin-top: 6px; }
+
+#top #foodLight { height: 36px; line-height: 36px; color: #9E9595; font-size: 12px; }
+#top #foodLight span { padding-left: 20px; font-size: 17px; font-weight: bold; margin-right: 3px; }
+#top #foodLight .greenLight { background: url("../../img/food/greenLight.png") no-repeat left center; background-size: 12px 12px; }
+#top #foodLight .yellowLight { background: url("../../img/food/yellowLight.png") no-repeat left center; background-size: 12px 12px; }
+#top #foodLight .redLight { background: url("../../img/food/redLight.png") no-repeat left center; background-size: 12px 12px; }
+
+/* 热量 */
+#calorie { position: relative; }
+#calorie  #calorieInfo { text-align: center; }
+#calorie  #calorieInfo #calorieValue { font-size: 36px; font-weight: bold; margin-right: 3px; }
+#calorie  #calorieInfo #calorieUnit { font-size: 14px; color: #9E9595; }
+#calorie  #calorieInfo #calorieDesc { display: block; font-size: 12px; color: #9E9595; }
+
+#calorie #unitContainer { position: absolute; right: 20px; top: 14px; }
+#calorie #unitContainer a { display: inline-block; width: 44px; height: 34px; font-size: 12px; text-align: center; line-height: 34px; color: #9E9595; }
+#calorie #unitContainer a.unitSelected { color: #6DC4E5; border-bottom: #6DC4E5 solid 2px; font-size: 14px; }
+
+/* 单位重量 */
+#foodWeightUnit { display: none; padding-bottom: 5px; }
+#foodWeightUnit p { font-size: 12px; color: #9E9595; line-height: 1.8em; margin: 0 auto 20px auto; }
+#foodWeightUnit p strong { color: #3D3333; margin: 0 3px; font-size: 14px; }
+
+#foodWeightUnit table { width: 100%; border-collapse: collapse; }
+#foodWeightUnit table td { height: 60px; }
+#foodWeightUnit table td.left { font-size: 15px; font-weight: bold; line-height: 24px; }
+#foodWeightUnit table td.left span { display: block; font-weight: normal; color: #9E9595; font-size: 12px; }
+#foodWeightUnit table td.right { color: #9E9595; text-align: right; font-size: 12px; }
+#foodWeightUnit table tr.moreWeightLine { display: none; }
+
+a#weightSwitchHandler { display: block; height: 44px; line-height: 44px; text-align: center; color: #9E9595; }
+a#weightSwitchHandler span { background-repeat: no-repeat; background-position: left center; background-size: 15px 10px !important; padding-left: 20px; }
+a#weightSwitchHandler span.arrowDown { background-image: url("../../img/food/ic_unit_arrow_down.png"); }
+a#weightSwitchHandler span.arrowUp { background-image: url("../../img/food/ic_unit_arrow_up.png"); }
+
+/* 同类对比 */
+#calorieCompare { display: none; text-align: center; margin: 30px auto 0 auto; }
+#calorieCompare #compareTitle { margin: 0 16px; }
+#calorieCompare #compareTitle span { display: block; color: #9E9595; font-size: 12px; }
+#calorieCompare #compareProgress { margin: 8px 16px; height: 4px; border-radius: 2px; background: #9BD6EC; overflow: hidden; }
+#calorieCompare #compareProgress span { display: inline; height: 4px; }
+#calorieCompare #compareProgress span.left { background: #D4EDF6; } 
+#calorieCompare #compareProgress span.center { background: #B7E1F1; border-left: white solid 2px; border-right: white solid 2px; } 
+#calorieCompare #compareProgress span.right { background: #9BD6EC; width: 30%; } 
+#calorieCompare #comparePointer { position: relative; margin: -16px 30px 0 16px; }
+#calorieCompare #comparePointer span { display: block; width: 4px; height: 4px; border-color: #6DC4E5; border-width: 3px; border-style: solid; background: white; border-radius: 6px; position: relative; left: 0%; top: 1px; }
+#calorieCompare #compareConclusion { color: #9E9595; margin-top: 8px; font-size: 12px; }
+#calorieCompare #compareConclusion span { color: #6DC4E5; }
+
+/* 榜单 */
+#rankingList { display: none; }
+#rankingList ul { margin: 0; padding: 0; list-style-type: none; }
+#rankingList ul li { background: url("../../img/food/award.png") no-repeat left center; background-size: 24px 24px; }
+#rankingList ul li a { color: #3D3333; display: block; height: 44px; line-height: 44px; padding-left: 30px; background: url("../../img/food/bullet.png") no-repeat right center; background-size: 6px 12px; white-space:nowrap; overflow: hidden; }
+
+#tagContainer {  }
+#tagContainer span { display: inline-block; line-height: 24px; height: 24px; width: 44px; text-align: center; font-size: 12px; background: url("../../img/food/tag_background.png") no-repeat; background-size: 60px 24px; padding-left: 16px; margin: 0 10px 10px 0; }
+
+/* 营养元素 */
+#nutrition { padding-bottom: 5px; }
+#nutrition a { text-align: center; height: 44px; line-height: 44px; color: #9E9595; display: block; }
+#nutrition a span { background: url("../../img/food/bullet.png") no-repeat right center; background-size: 6px 12px; padding-right: 12px; }
+
+#nutrition #nutritionTable { margin: 10px auto; text-align: center; }
+#nutrition #nutritionTable .nutritionItem div { font-size: 12px; }
+#nutrition #nutritionTable #nutritionLayout { margin-bottom: 10px; }
+#nutrition #nutritionTable #nutritionLayout .nutritionItem { width: 83px; height: 83px; line-height: 83px; margin: 0 auto; background-repeat: no-repeat; background-size: 83px 83px; font-size: 15px; font-weight: bold; }
+
+.circlePercent0 { background-image: url("../../img/food/img_circle_0.png"); } 
+.circlePercent1 { background-image: url("../../img/food/img_circle_1.png"); } 
+.circlePercent2 { background-image: url("../../img/food/img_circle_2.png"); } 
+.circlePercent3 { background-image: url("../../img/food/img_circle_3.png"); } 
+.circlePercent4 { background-image: url("../../img/food/img_circle_4.png"); } 
+.circlePercent5 { background-image: url("../../img/food/img_circle_5.png"); } 
+.circlePercent6 { background-image: url("../../img/food/img_circle_6.png"); } 
+.circlePercent7 { background-image: url("../../img/food/img_circle_7.png"); } 
+.circlePercent8 { background-image: url("../../img/food/img_circle_8.png"); } 
+.circlePercent9 { background-image: url("../../img/food/img_circle_9.png"); } 
+.circlePercent10 { background-image: url("../../img/food/img_circle_10.png"); } 
+.circlePercent11 { background-image: url("../../img/food/img_circle_11.png"); } 
+.circlePercent12 { background-image: url("../../img/food/img_circle_12.png"); } 
+.circlePercent13 { background-image: url("../../img/food/img_circle_13.png"); } 
+.circlePercent14 { background-image: url("../../img/food/img_circle_14.png"); } 
+.circlePercent15 { background-image: url("../../img/food/img_circle_15.png"); } 
+.circlePercent16 { background-image: url("../../img/food/img_circle_16.png"); } 
+.circlePercent17 { background-image: url("../../img/food/img_circle_17.png"); } 
+.circlePercent18 { background-image: url("../../img/food/img_circle_18.png"); } 
+.circlePercent19 { background-image: url("../../img/food/img_circle_19.png"); }  
+.circlePercent20 { background-image: url("../../img/food/img_circle_20.png"); } 
+
+.valueDesc { color: #6DC4E5 !important; }
+
+/* 血糖相关 */
+#bloodSugar { display: none; padding-bottom: 5px; }
+#bloodSugar table { width: 100%; }
+#bloodSugar table * { height: 44px; }
+#bloodSugar table th { font-weight: normal; text-align: left; }
+#bloodSugar table td { text-align: center; }
+#bloodSugar table td.valueDesc { text-align: right; }
+
+/* 原料与做法 */
+#recipeHandler { display: none; }
+#recipeHandler a { display: block; height: 44px; line-height: 44px; text-align: center; color: #3D3333; }
+#recipeHandler a span { background: url("../../img/food/recipe.png") no-repeat left center; background-size: 24px 24px; padding-left: 32px; }
+
+/* 评价 */
+#description { display: none; }
+#description p { margin: 0; line-height: 1.8em; color: #9E9595; font-size: 12px; }

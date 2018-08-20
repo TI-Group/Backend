@@ -37,6 +37,7 @@ public class FridgeAction extends BaseAction {
     private String downloadImageContentType;
     
     private String itemName;
+    private String barcode;
     
     /* ============================================================ */
     
@@ -125,6 +126,12 @@ public class FridgeAction extends BaseAction {
     public void setItemName(String itemName) {
         this.itemName = itemName;
     }
+    public String getBarcode() {
+        return barcode;
+    }
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
     
     /* ============================================================ */
     
@@ -173,6 +180,19 @@ public class FridgeAction extends BaseAction {
         return SUCCESS;
     }
     
+    public String addItemByBarcode() {
+        this.params = new HashMap<String, Object>();
+        this.params.put("success",  this.fridgeItemService.addItemIntoFridgeByBarcode(fridgeId, barcode, amount));
+        return SUCCESS;
+    }
+
+    public String deleteItemInFridge() {
+        this.params = new HashMap<String, Object>();
+        this.params.put("success", this.fridgeItemService.deleteItemInFridge(this.fridgeId, this.itemId));
+        return SUCCESS;
+    }
+    
+    @Deprecated
     public String deleteItem() {
         this.params = new HashMap<String, Object>();
         this.params.put("success",  fridgeItemService.deleteItemFromFridge(fridgeId, itemName));

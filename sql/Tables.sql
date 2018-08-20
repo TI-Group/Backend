@@ -77,9 +77,10 @@ create table FridgeItemRelationship
 create table Item
 (
    itemId               int not null auto_increment,
-   name                 varchar(20) not null,
-   shelflife            int not null,
-   calories             int not null,
+   name                 varchar(20),
+   shelflife            int,
+   calories             int,
+   barcode              varchar(20),
    primary key (itemId)
 );
 

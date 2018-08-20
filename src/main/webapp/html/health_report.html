@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>健康报告</title>
+		<meta name="description" content="健康报告">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="css/report/style.css">
+	</head>
+	<body>
+		<!-- 健康指数 -->
+		<header>
+			<div id="scoreContainer" class="circlePercent0">
+				<h1><span id="scoreValue">0</span><sup>分</sup></h1>
+				<h2>我的健康指数</h2>
+			</div>
+		</header>
+
+		<!-- 健康评级 -->
+		<section>
+			<h1 class="sectionTitle borderBottom"><span>我的健康评级</span></h1>
+			<div class="wrapper borderBottom">
+				<ul id="healthGradeList">
+					<li id="healthGradeS">S</li><li id="healthGradeA">A</li><li id="healthGradeB">B</li><li id="healthGradeC">C</li><li id="healthGradeF">F</li>
+				</ul>
+				<p class="desc">S 级：96 ~ 100分；A 级：86~ 95分；B 级：76~ 85分；C 级：61 ~ 75分；F 级：0 ~ 60分。</p>
+			</div>
+		</section>
+
+		<!-- 我的身材 -->
+		<section>
+			<h1 class="sectionTitle borderBottom"><span>我的身材怎么样？</span></h1>
+			<div class="wrapper borderBottom">
+				<h2 id="bmiTitle">BMI<a href="###" class="tipHandler" rel="BMI 指数，即身体质量指数，是目前国际上常用的衡量人体胖瘦程度以及是否健康的一个标准。">什么是BMI?</a></h2>
+				<div id="bmiProgress" class="progressContainer"></div>
+
+				<h2 id="bodyFatTitle">体脂率<a href="###" class="tipHandler" rel="体脂率是指人体内脂肪重量在人体总体重中所占的比例，又称体脂百分数，它反映人体内脂肪含量的多少。">什么是体脂率?</a></h2>
+				<div id="bodyFatProgress" class="progressContainer"></div>
+
+				<h3 id="bodyConclusion" class="left"></h3>
+				<div id="weightInfoContainer"></div>
+				<p id="exclusion" class="desc borderTop" align="center">注：不适用于孕妇或运动员</p>
+			</div>
+		</section>
+
+		<!-- 我显年轻吗？ -->
+		<section>
+			<h1 class="sectionTitle borderTop borderBottom"><span>我显年轻吗？</span></h1>
+			<div class="wrapper borderBottom">
+				<h2 id="ageTitle">身体年龄<a href="###" class="tipHandler" rel="身体年龄是综合体重、身体脂肪率等多种指数计算后得出的，它是一个高于或低于实际年龄的综合判断身体状况的标准。">什么是身体年龄?</a></h2>
+				<div id="ageProgress" class="progressContainer"></div>
+				<h3 id="ageConclusion" class="left">
+					<div>恭喜你，比实际年龄年轻了<span></span></div>
+				</h3>
+			</div>
+		</section>
+
+		<!-- 我该怎么吃？ -->
+		<section>
+			<h1 class="sectionTitle borderTop borderBottom"><span>我该怎么吃？</span></h1>
+			<div class="wrapper borderBottom">
+				<h2 id="calorieTitle">预算热量</h2>
+				<h3 id="calorieBudgetTip" class="left">
+					<div>预算热量是根据你的身体情况，你的目标，每天应该摄入的热量。</div>
+				</h3>
+				<p>不用过于精确，在<span id="targetRangeValue"></span>千卡的范围内都是合理的。</p>
+				<p class="desc">根据你的预算热量，我们为你制定了一周的食谱，以供参考。</p>
+				<a href="boohee://diet_plan" id="foodPlanButton" class="centerButton">查看饮食计划</a>
+			</div>
+		</section>
+
+		<!-- 我该怎么运动？ -->
+		<section>
+			<h1 class="sectionTitle borderTop borderBottom"><span>我该怎么运动？</span></h1>
+			<div class="wrapper borderBottom">
+				<h2 id="heartRateTitle">燃脂心率</h2>
+				<h3 id="heartRateTip" class="left">
+					<div>运动时心率在这个范围内，燃烧脂肪的效率最高。</div>
+				</h3>
+				<a href="boohee://sport_plan_list" id="sportPlanButton" class="centerButton">查看运动训练</a>
+			</div>
+		</section>
+
+		<!-- 提示框 -->
+		<div id="tipBox">
+			<p></p>
+			<a href="#" class="borderTop">我知道了</a>
+		</div>
+
+		<!-- 底部 -->
+		<footer>
+			<a href="boohee://close_page" id="startButton">开始改变</a>
+			<p class="desc">以上数据是根据你的身体数据和设定的目标来计算的，如果有较大变动，请重新评测。</p>
+			<a href="boohee://quiz_again" id="quizButton">重新评测</a>
+		</footer>
+
+		<script src="js/jquery-3.1.0.min.js"></script>
+		<script src="js/report/main.js"></script>
+	</body>
+</html>

@@ -71,7 +71,8 @@ public class FridgeItemServiceImpl implements FridgeItemService {
         List<FridgeItemRelationship> items = fridgeItemRelationshipDao.getItemsInFridge(fridge);
         List<ItemView> result = new ArrayList<>();
         for (FridgeItemRelationship i : items) {
-            ItemView iv = new ItemView(i.getItemId(), itemDao.getItemById(i.getItemId()).getName(), i.getAmount(), i.getRemainTime());
+            Item item = this.itemDao.getItemById(i.getItemId());
+            ItemView iv = new ItemView(i.getItemId(), item.getName(), i.getAmount(), i.getRemainTime(), item.getBarcode());
             result.add(iv);
         }
         return result;
@@ -114,6 +115,33 @@ public class FridgeItemServiceImpl implements FridgeItemService {
         return fridgeItemRelationshipDao.save(fi);
     }
 
+    @Override
+    public boolean addItemIntoFridgeByBarcode(int fridgeId, String barcode, int amount) {
+        Item it = null;
+        it = itemDao.getItemByBarcode(barcode);
+        if (it == null) {
+            // TODO check barcode is a real barcode !
+            it = new Item(0, null, null, null, barcode);
+            this.itemDao.save(it);
+        }
+        FridgeItemRelationship fi = fridgeItemRelationshipDao.getItemInFridgeByItemId(fridgeId, it.getItemId());
+        if (fi != null) {
+            return false;
+        }
+        fi = new FridgeItemRelationship(it.getItemId(), amount, fridgeId, it.getShelflife());
+        return fridgeItemRelationshipDao.save(fi);
+    }
+    
+    @Override
+    public boolean deleteItemInFridge(int fridgeId, int itemId) {
+        FridgeItemRelationship fi = fridgeItemRelationshipDao.getItemInFridgeByItemId(fridgeId, itemId);
+        if (fi == null) {
+            return false;
+        }
+        return fridgeItemRelationshipDao.delete(fi);
+    }
+    
+    @Deprecated
     @Override
     public boolean deleteItemFromFridge(int fridge, String item) {
         Item it = itemDao.getItemByName(item);

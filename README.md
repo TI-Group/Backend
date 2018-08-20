@@ -93,13 +93,15 @@ server side
                 itemId: 1,
                 itemName: '苹果',
                 amount: 1,
-                remainTime: 1  // 预计还能存放的时间
+                remainTime: 1,  // 预计还能存放的时间
+                barcode: '6921581596048'    // 条形码，如果没有则为空
             },
             {
                 itemId: 2,
                 itemName: '橘子',
                 amount: 1,
                 remainTime: 1  // 预计还能存放的时间
+                barcode: '6921581596048'    // 条形码，如果没有则为空
             }
             ]
         }
@@ -264,7 +266,40 @@ server side
         }
         ```
 
-- 删除物品
+- 扫条形码添加物品
+    - url: '/fridge/fridgeAction/addItemByBarcode',
+    - 传入数据示例：
+        ```
+        {
+            fridgeId: 1,
+            barcode: '6921581596048',
+            amount: 1
+        }
+        ```
+    - 返回数据示例：
+        ```
+        {
+            success: true (失败则为false)
+        }
+        ```
+
+- 删除物品（删除某个冰箱（fridgeId）里具有某个itemId的所有物品）
+    - url: '/fridge/fridgeAction/deleteItemInFridge',
+    - 传入数据示例：
+        ```
+        {
+            fridgeId: 1,
+            itemId: 1
+        }
+        ```
+    - 返回数据示例：
+        ```
+        {
+            success: true (失败则为false)
+        }
+        ```
+
+- 删除物品（已弃用）
     - url: '/fridge/fridgeAction/deleteItem',
     - 传入数据示例：
         ```

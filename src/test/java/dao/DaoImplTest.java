@@ -57,7 +57,7 @@ public class DaoImplTest extends SpringTestBase {
 			assertEquals(1, f.getFridgeId());
 		}
 	}
-
+/*
 	@Test
 	public void testItemDao() {
 		assertTrue(itemDao != null);
@@ -92,4 +92,5 @@ public class DaoImplTest extends SpringTestBase {
 		assertEquals(10, testGet.getAmount());
 		System.out.println(testGet.getTime());
 	}
+*/
 }
