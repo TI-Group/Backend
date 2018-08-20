@@ -1,6 +1,5 @@
 package service.impl;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -80,18 +79,24 @@ public class FridgeItemServiceImpl implements FridgeItemService {
 
     @Override
     public boolean changeItemOfFridge(int user, int fridge, int itemId, int amount) {
-        if (!checkUser(user, fridge)) return false;
+        if (!checkUser(user, fridge)) {
+            return false;
+        }
         try {
             FridgeItemRelationship fi = fridgeItemRelationshipDao.getItemInFridgeByItemId(fridge, itemId);
-            if (fi == null) return false;
+            if (fi == null) {
+                return false;
+            }
+            /*
             DailyChange dc = new DailyChange();
             dc.setFridgeId(fridge);
             dc.setItemId(itemId);
             dc.setAmount(amount - fi.getAmount());
             dc.setUserId(user);
+            dailyChangeDao.save(dc);
+            */
             fi.setAmount(amount);
             fridgeItemRelationshipDao.update(fi);
-            dailyChangeDao.save(dc);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -121,7 +126,7 @@ public class FridgeItemServiceImpl implements FridgeItemService {
         it = itemDao.getItemByBarcode(barcode);
         if (it == null) {
             // TODO check barcode is a real barcode !
-            it = new Item(0, null, null, null, barcode);
+            it = new Item(0, null, 0, 0, barcode);
             this.itemDao.save(it);
         }
         FridgeItemRelationship fi = fridgeItemRelationshipDao.getItemInFridgeByItemId(fridgeId, it.getItemId());
@@ -178,7 +183,7 @@ public class FridgeItemServiceImpl implements FridgeItemService {
             if(fi != null && fi.getAmount() >= 1) {
                 fi.setAmount(fi.getAmount()-1);
                 this.fridgeItemRelationshipDao.update(fi);    // 即使数量为0，也不删掉记录
-                DailyChange dc = new DailyChange(fridgeId, it.getItemId(), userId, 1, (Timestamp)new Date());
+                DailyChange dc = new DailyChange(fridgeId, it.getItemId(), userId, 1, new Date());
                 this.dailyChangeDao.save(dc);
                 return true;
             }

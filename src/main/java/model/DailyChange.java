@@ -1,6 +1,6 @@
 package model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class DailyChange {
     private int changeId;
@@ -8,13 +8,13 @@ public class DailyChange {
     private int itemId;
     private int userId;
     private int amount;
-    private Timestamp time;
+    private Date time;
     
     public DailyChange() {
         super();
     }
     
-    public DailyChange(int fridgeId, int itemId, int userId, int amount, Timestamp time) {
+    public DailyChange(int fridgeId, int itemId, int userId, int amount, Date time) {
     	this.fridgeId = fridgeId;
     	this.itemId = itemId;
     	this.userId = userId;
@@ -55,13 +55,13 @@ public class DailyChange {
 	/**
 	 * @return time
 	 */
-	public Timestamp getTime() {
+	public Date getTime() {
 		return time;
 	}
 	/**
 	 * @param time 要设置的 time
 	 */
-	public void setTime(Timestamp time) {
+	public void setTime(Date time) {
 		this.time = time;
 	}
 

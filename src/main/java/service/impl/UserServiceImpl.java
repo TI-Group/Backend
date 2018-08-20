@@ -176,7 +176,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
                 Item i = this.itemDao.getItemById(d.getItemId());
                 Map<String, Object> p = new HashMap<String, Object>();
                 p.put("changeId", d.getChangeId());
-                p.put("fridgeid", d.getChangeId());
+                p.put("fridgeId", d.getChangeId());
                 p.put("itemId", d.getItemId());
                 p.put("itemName", i.getName());
                 p.put("userId", d.getUserId());
