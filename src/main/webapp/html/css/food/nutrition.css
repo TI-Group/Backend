@@ -1,0 +1,15 @@
+#nutritionHeader { position: fixed; left: 0; right: 0; top: 0; background: #F8F8F8; z-index: 9; }
+#nutritionHeader div { height: 48px; line-height: 48px; color: #9E9595; }
+
+.left { text-align: left; }
+.left span { padding-left: 20px; }
+.center { text-align: right; }
+.right { text-align: right; }
+.right span { padding-right: 20px; }
+
+.valueDesc { color: #6DC4E5 !important; }
+
+table { margin-top: 48px; width: 100%; background: white; border-collapse: collapse; }
+table td { height: 48px; width: 33%; }
+table td.left { padding-left: 20px; }
+table td.right { padding-right: 20px; }

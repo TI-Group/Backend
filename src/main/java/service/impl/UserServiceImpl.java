@@ -1,9 +1,12 @@
 package service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang.time.DateUtils;
 
 import common.constant.UserRole;
 import dao.UserDao;
@@ -167,17 +170,20 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
     public List<Map<String, Object>> getEatingRecords(int userId) {
         List<Map<String, Object>> params = new ArrayList<Map<String, Object>>();
         List<DailyChange> ld = this.dailyChangeDao.getDailyChangeOfUser(userId);
+        Date today = new Date();
         for(DailyChange d : ld) {
-            Item i = this.itemDao.getItemById(d.getItemId());
-            Map<String, Object> p = new HashMap<String, Object>();
-            p.put("changeId", d.getChangeId());
-            p.put("fridgeid", d.getChangeId());
-            p.put("itemId", d.getItemId());
-            p.put("itemName", i.getName());
-            p.put("userId", d.getUserId());
-            p.put("amount", d.getAmount());
-            p.put("time", d.getTime());
-            params.add(p);
+            if(DateUtils.isSameDay(today, d.getTime())) {    // 只保留当天的结果
+                Item i = this.itemDao.getItemById(d.getItemId());
+                Map<String, Object> p = new HashMap<String, Object>();
+                p.put("changeId", d.getChangeId());
+                p.put("fridgeid", d.getChangeId());
+                p.put("itemId", d.getItemId());
+                p.put("itemName", i.getName());
+                p.put("userId", d.getUserId());
+                p.put("amount", d.getAmount());
+                p.put("time", d.getTime());
+                params.add(p);
+            }
         }
         return params;
     }

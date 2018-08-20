@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>食物详情</title>
+		<meta name="description" content="食物详情">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="css/food/common.css">
+		<link rel="stylesheet" href="css/food/style.css">
+	</head>
+	<body>
+		<!-- 顶部 -->
+		<section id="top">
+			<a href="#"><img src="" id="foodImage" /></a>
+			<div id="foodName"></div>
+			<div id="foodLight"></div>
+		</section>
+
+		<!-- 热量 -->
+		<section id="calorie">
+			<h2>热量</h2>
+			<div id="unitContainer">
+				<a href="###" id="unitKCal" class="unitSelected">千卡</a><a href="###" id="unitKJ">千焦</a>
+			</div>
+			<div id="calorieInfo">
+				<span id="calorieValue">?</span>
+				<span id="calorieUnit">千卡</span>
+				<span id="calorieDesc"></span>
+			</div>
+			<div id="calorieCompare">
+				<div id="compareTitle" class="threeColumn clearfix">
+					<span class="left">相对较低</span>
+					<span class="center">相对一般</span>
+					<span class="right">相对较高</span>
+				</div>
+				<div id="compareProgress" class="threeColumn clearfix">
+					<span class="left"></span>
+					<span class="center"></span>
+					<span class="right"></span>
+				</div>
+				<div id="comparePointer">
+					<span></span>
+				</div>
+				<div id="compareConclusion"></div>
+			</div>
+		</section>
+
+		<!-- 食物亮点 -->
+		<section id="rankingList">
+			<h2 class="borderTop">食物亮点</h2>
+			<div id="tagContainer" class="clearfix"></div>
+			<ul>
+			</ul>
+		</section>
+
+		<!-- 营养元素 -->
+		<section id="nutrition">
+			<h2 class="borderTop">营养元素<span id="unitHandler"></span></h2>
+			<div id="nutritionTable">
+				<div id="nutritionLayout" class="threeColumn clearfix">
+					<div class="left">
+						<div id="proteinCircle" class="nutritionItem"></div>
+					</div>
+					<div class="center">
+						<div id="fatCircle" class="nutritionItem"></div>
+					</div>
+					<div class="right">
+						<div id="carboCircle" class="nutritionItem"></div>
+					</div>
+				</div>
+				<div class="threeColumn clearfix">
+					<div class="left">
+						<div class="nutritionItem">
+							<div>蛋白质</div>
+							<div>
+								<span id="proteinValue" class="nutritionValue">?</span>
+								<span>克</span>
+							</div>
+						</div>
+					</div>
+					<div class="center">
+						<div class="nutritionItem">
+							<div>脂肪</div>
+							<div>
+								<span id="fatValue" class="nutritionValue">?</span>
+								<span>克</span>
+							</div>
+						</div>
+					</div>
+					<div class="right">
+						<div class="nutritionItem">
+							<div>碳水化合物</div>
+							<div>
+								<span id="carboValue" class="nutritionValue">?</span>
+								<span>克</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<a href="###" id="nutritionLink"><span>更多营养元素</span></a>
+		</section>
+
+		<!-- 单位重量 -->
+		<section id="foodWeightUnit">
+			<h2 class="borderTop">单位重量</h2>
+			<p>重量应按照<strong>可食用的部分</strong>来计算。例如玉米的可食用部分不包含玉米芯，西瓜的可食用部分不包括西瓜皮。</p>
+			<table id="weightList"></table>
+		</section>
+
+
+		<!-- 原料与做法 -->
+		<div id="recipeHandler">
+			<a href="#"><span>原料与做法</span></a>
+		</div>
+
+		<!-- 血糖相关 -->
+		<section id="bloodSugar">
+			<h2 class="borderTop">血糖相关</h2>
+			<table>
+				<tr>
+					<th>GI值</th>
+					<td id="giValue">?</td>
+					<td id="giDesc" class="valueDesc"></td>
+				</tr>
+				<tr>
+					<th>GL值</th>
+					<td id="glValue">?</td>
+					<td id="glDesc" class="valueDesc"></td>
+				</tr>
+			</table>
+		</section>
+
+		<!-- 评价 -->
+		<section id="description">
+			<h2 class="borderTop">薄荷评价</h2>
+		</section>
+
+		<!-- footer -->
+		<section id="footer"></section>
+
+		<script src="js/jquery-3.1.0.min.js"></script>
+		<script src="js/common.js"></script>
+		<script src="js/food/main.js"></script>
+	</body>
+</html>

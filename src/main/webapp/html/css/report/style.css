@@ -1,0 +1,142 @@
+body { background: #F8F8F8; padding: 0; margin: 0 auto; max-width: 640px; min-width: 320px; font-family: 'PingFang SC','Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 14px; color: #3D3333; }
+
+html, body { -webkit-user-select: none; user-select: none; }
+a, img { -webkit-touch-callout: none; }
+a { text-decoration: none; }
+
+.borderTop, .borderBottom { position: relative; }
+.borderTop::before { content: ''; position: absolute; left: 0px; background: #dfdfdf; width: 100%; height: 1px; -webkit-transform: scaleY(0.5); top: 0; -webkit-transform-origin: 0 bottom; }
+.borderBottom::after { content: ''; position: absolute; left: 0px; background: #dfdfdf; width: 100%; height: 1px; -webkit-transform: scaleY(0.5); bottom: 0; -webkit-transform-origin: 0 bottom; }
+
+.clearfix:before, .clearfix:after { content: " "; display: table; }
+.clearfix:after { clear: both; }
+
+/* 头部 */
+header { height: 248px; background: #ff872e; background: -webkit-linear-gradient(top, #ff872e 0%,#ff6b48 100%); background: linear-gradient(to bottom, #ff872e 0%,#ff6b48 100%); padding: 10px; }
+header #scoreContainer { width: 170px; height: 140px; padding: 30px; position: relative; left: 50%; top: 16px; margin: 0 0 0 -115px; background-size: 230px 200px; }
+header #scoreContainer h1 { font-weight: normal; text-align: center; margin: 36px 0 0 0; text-align: center; color: white; height: 80px; line-height: 80px; padding-left: 22px; }
+header #scoreContainer h1 span { font-family: 'PingFangSC-Thin'; font-size: 72px; }
+header #scoreContainer h1 sup { font-family: 'PingFangSC-Light'; font-size: 21px; position: relative; top: -25px; margin-left: 5px; }
+header #scoreContainer h2 { font-size: 14px; font-weight: normal; color: rgba(255, 255, 255, 0.6); text-align: center; margin: 0 auto; }
+
+.circlePercent0 { background-image: url("../../img/report/img_report_arc_0.png"); } 
+.circlePercent1 { background-image: url("../../img/report/img_report_arc_1.png"); } 
+.circlePercent2 { background-image: url("../../img/report/img_report_arc_2.png"); } 
+.circlePercent3 { background-image: url("../../img/report/img_report_arc_3.png"); } 
+.circlePercent4 { background-image: url("../../img/report/img_report_arc_4.png"); } 
+.circlePercent5 { background-image: url("../../img/report/img_report_arc_5.png"); } 
+.circlePercent6 { background-image: url("../../img/report/img_report_arc_6.png"); } 
+.circlePercent7 { background-image: url("../../img/report/img_report_arc_7.png"); } 
+.circlePercent8 { background-image: url("../../img/report/img_report_arc_8.png"); } 
+.circlePercent9 { background-image: url("../../img/report/img_report_arc_9.png"); } 
+.circlePercent10 { background-image: url("../../img/report/img_report_arc_10.png"); } 
+.circlePercent11 { background-image: url("../../img/report/img_report_arc_11.png"); } 
+.circlePercent12 { background-image: url("../../img/report/img_report_arc_12.png"); } 
+.circlePercent13 { background-image: url("../../img/report/img_report_arc_13.png"); } 
+.circlePercent14 { background-image: url("../../img/report/img_report_arc_14.png"); } 
+.circlePercent15 { background-image: url("../../img/report/img_report_arc_15.png"); } 
+.circlePercent16 { background-image: url("../../img/report/img_report_arc_16.png"); } 
+.circlePercent17 { background-image: url("../../img/report/img_report_arc_17.png"); } 
+.circlePercent18 { background-image: url("../../img/report/img_report_arc_18.png"); } 
+.circlePercent19 { background-image: url("../../img/report/img_report_arc_19.png"); }  
+.circlePercent20 { background-image: url("../../img/report/img_report_arc_20.png"); } 
+
+/* 中间内容 */
+
+section { margin-bottom: 10px; overflow-x: hidden; }
+
+.sectionTitle { font-size: 17px; font-weight: normal; text-align: center; margin: 0; height: 60px; line-height: 60px; background: white; }
+.sectionTitle span { border-bottom: #ff6b48 solid 2px; height: 56px; line-height: 56px; display: inline-block; padding: 0 10px 0 20px; color: #9E9595; }
+
+.wrapper { padding: 16px; background: white; }
+.wrapper h2 { position: relative; font-size: 15px; color: #3D3333; font-weight: normal; height: 20px; line-height: 20px; border-left-width: 4px; border-left-style: solid; padding-left: 10px; margin: 1em auto 2em auto; }
+.wrapper h2 a { display: block; width: 28px; height: 28px; text-indent: -999px; overflow: hidden; background: url("../../img/report/ic_question.png") no-repeat center center; background-size: contain; float: right; color: #9E9595; text-decoration: underline; font-size: 12px; margin-top: -4px; }
+
+.wrapper h3 { font-size: 14px; font-weight: normal; box-shadow: 0 1px 8px 0 rgba(0,0,0,0.1); }
+.wrapper h3.center { text-align: center; height: 58px; line-height: 58px; }
+.wrapper h3.left { line-height: 1.8em; text-align: left; }
+.wrapper h3 div { background-size: 24px 24px; display: inline-block;  background-repeat: no-repeat; }
+.wrapper h3.left div { padding: 15px 15px 15px 50px; background-position: 15px center; }
+.wrapper h3.center div { padding-left: 30px; background-position: left center; }
+.wrapper h3 span { font-size: 17px; color: #7ec2f3; margin-left: 5px; }
+
+.desc { color: #9E9595; font-size: 12px; line-height: 1.8em; }
+
+.progressContainer { position: relative; width: 288px; height: 70px; margin: 1em auto 3em auto; background-size: contain; background-repeat: no-repeat; }
+.progressContainer div { position: absolute; height: 5px; top: 40px; border-radius: 3px; }
+.progressContainer span { position: absolute; top: 17px; font-size: 10px; color: white; text-align: center; padding: 1px 4px; border-radius: 9px; display: inline-block; width: 30px; margin-left: -19px; }
+
+a.centerButton { display: inline-block; position: relative; left: 50%; text-align: center; font-size: 14px; width: 140px; height: 34px; line-height: 34px; border-radius: 22px; margin: 1em 0 1em -70px; }
+
+.bigData { font-family: 'PingFangSC-Light'; font-size: 30px; position: absolute; left: 20px; right: 30px; top: -4px; text-align: center; }
+.bigData sup { font-size: 12px; color: #9E9595; position: relative; margin-left: 5px; top: -5px; }
+#bmiTitle .bigData { padding-left: 48px; }
+#bodyFatTitle .bigData { padding-left: 60px; }
+#ageTitle .bigData { padding-left: 12px; }
+#calorieTitle .bigData { padding-left: 24px; }
+#heartRateTitle .bigData { padding-left: 42px; }
+
+/* 健康评级 */
+ul#healthGradeList { margin: 1em auto 2em auto; padding: 0; height: 36px; list-style-type: none; text-align: center; }
+ul#healthGradeList li { display: inline-block; width: 24px; height: 24px; line-height: 24px; background: blue; margin: 1px; border-radius: 3px; color: white; opacity: 0.5; }
+ul#healthGradeList li#healthGradeS { background-color: #42bd56; }
+ul#healthGradeList li#healthGradeA { background-color: #8ac53d; }
+ul#healthGradeList li#healthGradeB { background-color: #bbcb1c; }
+ul#healthGradeList li#healthGradeC { background-color: #ffa400; }
+ul#healthGradeList li#healthGradeF { background-color: #f96650; }
+ul#healthGradeList li.selected { width: 36px; height: 36px; line-height: 36px; border-radius: 4px; font-size: 21px; opacity: 1; }
+
+/* BMI */
+.wrapper h2#bmiTitle { border-left-color: #7ec2f3; }
+.progressContainer#bmiProgress { background-image: url("../../img/report/img_report_progress_bmi.png"); }
+.progressContainer#bmiProgress div { background: #7ec2f3; }
+.progressContainer#bmiProgress span { background: #7ec2f3; }
+
+/* 体脂率 */
+.wrapper h2#bodyFatTitle { border-left-color: #ffbb4f; }
+#bodyFatProgress.male { background-image: url("../../img/report/img_report_progress_fat_man.png"); }
+#bodyFatProgress.female { background-image: url("../../img/report/img_report_progress_fat_woman.png"); }
+.progressContainer#bodyFatProgress div { background: #ffbb4f; }
+.progressContainer#bodyFatProgress span { background: #ffbb4f; }
+
+/* 身材的评价 */
+.wrapper h3#bodyConclusion div { background-image: url("../../img/report/ic_tip_1.png"); }
+.wrapper p#exclusion { margin: 0; padding-top: 16px; }
+
+#weightInfoContainer { margin-bottom: 10px; }
+#weightInfoContainer > div { text-align: center; padding: 12px 0; }
+#weightInfoContainer .left { float: left; }
+#weightInfoContainer .right { float: right; }
+#weightInfoContainer h4 { font-size: 12px; color: #9E9595; font-weight: normal; margin: 0 auto; }
+#weightInfoContainer h5 { font-size: 17px; font-weight: normal; margin: 0 auto; }
+#weightInfoContainer h5 sup { font-size: 12px; color: #9E9595; margin-left: 3px; position: relative; top: 2px; }
+
+/* 身体年龄 */
+.wrapper h2#ageTitle { border-left-color: #7d9bf1; margin-bottom: 0.5em; }
+.progressContainer#ageProgress { background-image: url("../../img/report/img_report_progress_age.png"); margin-top: 0 !important; }
+.progressContainer#ageProgress div { background: #7d9bf1; }
+.progressContainer#ageProgress span { background: #7d9bf1; }
+
+.wrapper h3#ageConclusion div { background-image: url("../../img/report/ic_tip_2.png"); }
+
+/* 预算热量 */
+.wrapper h2#calorieTitle { border-left-color: #62cc74; }
+.wrapper h3#calorieBudgetTip div { background-image: url("../../img/report/ic_tip_3.png"); }
+a.centerButton#foodPlanButton { color: #62CC74; border: #62CC74 solid 1px; }
+#targetRangeValue { color: #62cc74; font-size: 17px; margin: 0 5px; }
+
+/* 燃脂心率 */
+.wrapper h2#heartRateTitle { border-left-color: #ff6260; }
+.wrapper h3#heartRateTip div { background-image: url("../../img/report/ic_tip_4.png"); }
+a.centerButton#sportPlanButton { color: #ff6260; border: #ff6260 solid 1px; }
+
+/* 弹窗 */
+#tipBox { display: none; position: fixed; width: 260px; background: white; left: 50%; top: 40%; margin-left: -147px; padding: 16px 16px 0 16px; box-shadow: 0 1px 8px 0 rgba(0,0,0,0.2); border: #dfdfdf solid 1px; border-radius: 12px; }
+#tipBox p { margin: 0 auto 1em auto; line-height: 1.8em; }
+#tipBox a { display: block; width: 100%; height: 44px; line-height: 44px; color: #ff6b48; text-align: center; font-size: 16px; }
+
+/* 底部 */
+footer { padding: 16px; }
+footer a { display: block; }
+footer a.bigButton { background: #ff6b48; font-size: 17px; color: white; text-align: center; height: 44px; line-height: 44px; border-radius: 3px; }
+footer a.smallButton { color: #ff6b48; font-size: 14px; text-align: center; text-decoration: underline; height: 44px; line-height: 44px; }
