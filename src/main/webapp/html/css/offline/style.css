@@ -1,0 +1,17 @@
+body { background: #F8F8F8; padding: 0; margin: 0 auto; max-width: 640px; min-width: 320px; font-family: 'PingFang SC','Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 14px; line-height: 1.7em; color: #3D3333; }
+
+html, body { -webkit-user-select: none; user-select: none; }
+a, img { -webkit-touch-callout: none; }
+a { text-decoration: none; }
+
+h1 { font-size: 14px; font-weight: normal; margin: 16px; }
+
+img { box-shadow: 2px 2px 8px #ccc; }
+
+.wrapContainer { background: white; padding: 1px 16px; position: relative; margin: 15px 0; }
+.wrapContainer::after, h3::after { content: ''; position: absolute; left: 0px; background: #dfdfdf; width: 100%; height: 1px; -webkit-transform: scaleY(0.5); bottom: 0; -webkit-transform-origin: 0 bottom; }
+.wrapContainer::before { content: ''; position: absolute; left: 0px; background: #dfdfdf; width: 100%; height: 1px; -webkit-transform: scaleY(0.5); top: 0; -webkit-transform-origin: 0 top; }
+
+.wrapContainer h3 { font-size: 17px; font-weight: normal; position: relative; margin: 0; padding: 10px 0; }
+
+#iOS9Tips, #iOS10Tips { display: none; }

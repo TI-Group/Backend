@@ -1,0 +1,14 @@
+header { margin: 0; padding: 20px; box-shadow: 0px 4px 20px #EEE; margin-bottom: 20px; }
+header h1 { font-size: 21px; margin: 0 auto; height: 44px; line-height: 44px; font-weight: bold; }
+header p { font-size: 14px; margin: 0 auto; color: #9E9595; }
+
+ul { margin: 0; padding: 0; list-style-type: none; counter-reset: listCounter; }
+ul li {  }
+ul li a { text-decoration: none; padding: 16px 20px; display: block; height: 60px; }
+ul li a h2 { margin: 4px 0 0 0; font-weight: bold; font-size: 16px; color: #3D3333; white-space: nowrap; overflow: hidden; }
+ul li a img { width: 60px; height: 60px; background: #DFDFDF; border-radius: 3px; float: left; margin-right: 16px; }
+ul li a p { margin: 6px 0 0 0; font-size: 14px; color: #9E9595; }
+ul li a p span { color: #F96650; }
+
+ul li.order { position: relative; }
+ul li.order::before { content: counter(listCounter); counter-increment: listCounter; display: block; width: 18px; height: 18px; background: url("../../img/food/ic_list_flag.png") no-repeat center; background-size: 18px 18px; color: white; text-align: center; line-height: 18px; font-size: 11px; position: absolute; top: 22px; left: 17px; }
