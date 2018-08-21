@@ -71,7 +71,10 @@ public class FridgeItemServiceImpl implements FridgeItemService {
         List<ItemView> result = new ArrayList<>();
         for (FridgeItemRelationship i : items) {
             Item item = this.itemDao.getItemById(i.getItemId());
-            ItemView iv = new ItemView(i.getItemId(), item.getName(), i.getAmount(), i.getRemainTime(), item.getBarcode());
+            ItemView iv = new ItemView(i.getItemId(), item.getName(), i.getAmount(), i.getRemainTime(), item.getBarcode(), i.getPutInTime(), item.getShelflife());
+            if(iv.getBarcode() == null) {
+                iv.setBarcode("none");
+            }
             result.add(iv);
         }
         return result;
@@ -116,7 +119,7 @@ public class FridgeItemServiceImpl implements FridgeItemService {
         if (it == null) return false;
         FridgeItemRelationship fi = fridgeItemRelationshipDao.getItemInFridgeByItemId(fridge, it.getItemId());
         if (fi != null) return false;
-        fi = new FridgeItemRelationship(it.getItemId(), amount, fridge, it.getShelflife());
+        fi = new FridgeItemRelationship(it.getItemId(), amount, fridge, it.getShelflife(), new Date());
         return fridgeItemRelationshipDao.save(fi);
     }
 
@@ -129,12 +132,20 @@ public class FridgeItemServiceImpl implements FridgeItemService {
             it = new Item(0, null, 0, 0, barcode);
             this.itemDao.save(it);
         }
-        FridgeItemRelationship fi = fridgeItemRelationshipDao.getItemInFridgeByItemId(fridgeId, it.getItemId());
-        if (fi != null) {
-            return false;
+        FridgeItemRelationship fi = this.fridgeItemRelationshipDao.getItemInFridgeByItemId(fridgeId, it.getItemId());
+        if (fi == null) {
+            fi = new FridgeItemRelationship(it.getItemId(), amount, fridgeId, it.getShelflife(), new Date());
+            return this.fridgeItemRelationshipDao.save(fi);
         }
-        fi = new FridgeItemRelationship(it.getItemId(), amount, fridgeId, it.getShelflife());
-        return fridgeItemRelationshipDao.save(fi);
+        else {
+            int oldAmount = fi.getAmount();
+            fi.setAmount(oldAmount + amount);
+            Date oldPutInTime = fi.getPutInTime();
+            Date newPutInTime = new Date((oldPutInTime.getTime()*oldAmount+(new Date()).getTime()*amount)/(oldAmount+amount));    // 物品的放入时间，采用移动平均来计算
+            fi.setPutInTime(newPutInTime);
+            return this.fridgeItemRelationshipDao.update(fi);
+        }
+        
     }
     
     @Override
@@ -166,7 +177,7 @@ public class FridgeItemServiceImpl implements FridgeItemService {
                 this.fridgeItemRelationshipDao.update(fi);
             }
             else {
-                fi = new FridgeItemRelationship(it.getItemId(), 1, fridgeId, it.getShelflife());
+                fi = new FridgeItemRelationship(it.getItemId(), 1, fridgeId, it.getShelflife(), new Date());
                 this.fridgeItemRelationshipDao.save(fi);
             }
             return true;

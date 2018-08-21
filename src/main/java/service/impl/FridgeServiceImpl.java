@@ -1,6 +1,7 @@
 package service.impl;
 
 import java.io.File;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -100,7 +101,7 @@ public class FridgeServiceImpl implements FridgeService {
         }    // 至此，newItems不再包含原来在冰箱里的物品
         for(Integer newItemId : newItems) {    // 如果物品原来不在冰箱里，现在新加进来，只更新冰箱表，设置数量为0
             Item item = this.itemDao.getItemById(newItemId);    // 获得保质期
-            FridgeItemRelationship fir = new FridgeItemRelationship(newItemId, 0, fridgeId, item.getShelflife());
+            FridgeItemRelationship fir = new FridgeItemRelationship(newItemId, 0, fridgeId, item.getShelflife(), new Date());
             this.fridgeItemRelationshipDao.save(fir);
         }
         return true;

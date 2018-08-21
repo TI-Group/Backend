@@ -68,6 +68,7 @@ create table FridgeItemRelationship
    fridgeId             int not null,
    id                   int not null auto_increment,
    remainTime           int,
+   putInTime            datetime,
    primary key (id)
 );
 

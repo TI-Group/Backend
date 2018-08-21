@@ -11,5 +11,6 @@
         <property name="amount" />
         <property name="fridgeId" />
         <property name="remainTime" />
+        <property name="putInTime" type="timestamp" />
 	</class>
 </hibernate-mapping>
