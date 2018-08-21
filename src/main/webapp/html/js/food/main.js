@@ -34,7 +34,8 @@ function init(data) {
 
 	// 头部
 	$("#foodImage").attr("src", data.thumb_image_url);
-	$("#top a").attr("href", "boohee://show_image/" + encodeURIComponent(data.large_image_url));
+	//$("#top a").attr("href", "boohee://show_image/" + encodeURIComponent(data.large_image_url));
+	$("#top a").attr("href", data.large_image_url);
 
 	$("#foodName").html(data.name);
 

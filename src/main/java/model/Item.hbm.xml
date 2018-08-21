@@ -10,5 +10,6 @@
         <property name="name" />
         <property name="shelflife" />
         <property name="calories" />
+        <property name="barcode" />
 	</class>
 </hibernate-mapping>

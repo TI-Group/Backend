@@ -73,7 +73,7 @@
                 <param name="root">params</param>
             </result>
             <allowed-methods>
-                getItems,changeItem,getDailyChange,addItem,deleteItem,increaseItem,decreaseItem
+                getItems,changeItem,getDailyChange,addItem,addItemByBarcode,deleteItemInFridge,deleteItem,increaseItem,decreaseItem
             </allowed-methods>
         </action>
     </package>

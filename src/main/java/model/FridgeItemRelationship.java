@@ -1,23 +1,27 @@
 package model;
 
+import java.util.Date;
+
 public class FridgeItemRelationship {
     private int id;
     private int itemId;
     private int amount;
     private int fridgeId;
     private int remainTime;
+    private Date putInTime;    // 食物放入的时间戳
 
     /* ======================================= */
 
     public FridgeItemRelationship() {
         super();
     }
-    public FridgeItemRelationship(int itemId, int amount, int fridgeId, int remainTime) {
+    public FridgeItemRelationship(int itemId, int amount, int fridgeId, int remainTime, Date putInTime) {
         super();
         this.itemId = itemId;
         this.amount = amount;
         this.fridgeId = fridgeId;
         this.remainTime = remainTime;
+        this.putInTime = putInTime;
     }
     
     public int getId() {
@@ -55,6 +59,12 @@ public class FridgeItemRelationship {
     }
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+    public Date getPutInTime() {
+        return putInTime;
+    }
+    public void setPutInTime(Date putInTime) {
+        this.putInTime = putInTime;
     }
 
 }
